@@ -808,18 +808,13 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
 //Alle löschen
 void MainWindow::on_pushButton_4_clicked()
 {
-    QListIterator<QObject *> list = ui->gridGroupBox->children();
-    while(list.hasNext()){
-        QCheckBox *b = qobject_cast<QCheckBox*>(list.next());
-        //b.setChecked(false);
-    }
-
+    //TODO
 }
 
 //Alle setzen
 void MainWindow::on_pushButton_3_clicked()
 {
-
+    //TODO
 }
 
 //Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable
@@ -834,3 +829,8 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 }
 
 
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    //TODO
+}

@@ -77,6 +77,18 @@ extern unsigned char char_x[];
 extern unsigned char char_y[];
 extern unsigned char char_z[];
 
+//Numbers
+extern unsigned char char_0[];
+extern unsigned char char_1[];
+extern unsigned char char_2[];
+extern unsigned char char_3[];
+extern unsigned char char_4[];
+extern unsigned char char_5[];
+extern unsigned char char_6[];
+extern unsigned char char_7[];
+extern unsigned char char_8[];
+extern unsigned char char_9[];
+
 //Special characters
 extern unsigned char char_space[];
 extern unsigned char char_smaller_as[];
