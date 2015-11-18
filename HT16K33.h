@@ -26,6 +26,8 @@ void ht16k33_print_array_dimm(int, unsigned char[8][8]);
 void ht16k33_print_string(int, char*);
 void ht16k33_scroll_chars_left(int, unsigned char*, unsigned char*);
 void ht16k33_print_left(int, char*);
+void ht16k33_scroll_chars_right(int, unsigned char*, unsigned char*);
+void ht16k33_print_right(int, char*);
 void ht16k33_set_brigthness(int, unsigned char);
 void ht16k33_set_single_led(int,int,int,int);
 
