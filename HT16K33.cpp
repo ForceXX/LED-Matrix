@@ -57,23 +57,24 @@ void ht16k33_clear(int fd){
 }
 
 /*
- * 	Prints given Arrays of 8 chars to the LED-Matrix
+ * Prints given Arrays of 8 chars to the LED-Matrix
  */
 void ht16k33_print_array(int fd, unsigned char arr8x8[8]) {
     for (int i = 0; i < 8 ; i++) {
         ht16k33_write_byte(fd, row_address[7-i], arr8x8[i]);
     }
-}
-
+//Initialize the HT16K33-Controller
 int ht16k33_init_i2c() {
     int fd;
     fd = open("/dev/i2c-1", O_RDWR);
     if (fd == -1) {
         printf("Failed to open I2C device.\n");
+	return -1;
     }
     int result = ioctl(fd, I2C_SLAVE, 0x70);
     if (result == -1) {
         printf("Failed to set address.\n");
+	return -1;
     }
     ht16k33_write_command(fd, 0x21); // Start oscillator (page 10)
     ht16k33_write_command(fd, 0x81); // Display on, blinking off (page 11)
@@ -82,6 +83,7 @@ int ht16k33_init_i2c() {
     return fd;
 }
 
+//Prints string, redraw every single character
 void ht16k33_print_string(int fd, char input[]) {
     int size = strlen(input);
     for (int i = 0; i < size; i++) {
@@ -114,12 +116,38 @@ void ht16k33_print_left(int fd, char s[]){
 
 }
 
+/*
+ * Scrolls two chars from the left to the right
+ */
+void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char char2[]){
+    for(int j = 0; j < 8; j++){
+        for (int i = 0; i < 8 ; i++) {
+                    ht16k33_write_byte(fd, row_address[7-i],((char1[i]>>j)|(char2[i]<<(8-j)) ) );
+                    printf("row%d: %x\n",7-i,(char)(char1[i]>>j)|(char2[i]<<(8-j)) );
+        }
+        usleep(SCROLL_WAIT);
+    }
+}
+
+/*
+ * Scrolls the given char Array from the left to the right
+ */
+void ht16k33_print_right(int fd, char s[]){
+        int size = strlen(s)-1;
+        for(int i = 0; i <size; i++){
+            ht16k33_scroll_chars_left(fd, charInHex(s[i]), charInHex(s[i+1]));
+        }
+
+}
+
+//Sets given LED with coordinates X=posX, Y=posY to 1, if value != 0, else to 0
 void ht16k33_set_single_led(int fd, int posX, int posY, int value){
     if(((posX<=7)&&(posX>=0)) && ((value==0)||(value==1))){
         ht16k33_write_byte(fd, row_address[posY], (value<<posX));
     }
 }
 
+//Sets brightness of the LEDs
 void ht16k33_set_brigthness(int fd, unsigned char brigthness){
     ht16k33_write_command(fd, brigthness);
 }
