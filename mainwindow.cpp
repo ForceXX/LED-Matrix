@@ -129,7 +129,7 @@ void MainWindow::on_comboBox_activated(int index)
 {
     switch(index){
         case 0://Kein Blinken
-            display_setting &= ~(0x3<<2);
+            display_setting &= ~(0x3<<1);
             printf("0 %x\n",display_setting);
             ht16k33_write_command(fd, display_setting);
             break;
