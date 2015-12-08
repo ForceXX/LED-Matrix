@@ -2,7 +2,7 @@
  * util.h
  *
  *  Created on: 27.10.2015
- *      Author: forcexx
+ *      Author: Jonas Heim/Alexander Rabenstein
  */
 
 

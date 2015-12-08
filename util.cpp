@@ -2,7 +2,7 @@
  * util.c
  *
  *  Created on: 27.10.2015
- *      Author: Jonas Heim
+ *      Author: Jonas Heim/Alexander Rabenstein
  */
 #include<stdio.h>
 #include"util.h"

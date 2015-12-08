@@ -2,7 +2,7 @@
  * HT16K33.h
  *
  *  Created on: 26.10.2015
- *      Author: Jonas Heim
+ *      Author: Jonas Heim/Alexander Rabenstein
  */
 
 

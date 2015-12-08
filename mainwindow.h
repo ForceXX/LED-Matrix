@@ -25,6 +25,7 @@ private:
     char matrix_row_5;
     char matrix_row_6;
     char matrix_row_7;
+    bool isInverted;
 
     char display_setting;
     Ui::MainWindow *ui;
@@ -103,8 +104,14 @@ private slots:
     void on_checkBox_7_0_clicked(bool checked);
     void on_pushButton_4_clicked();
     void on_pushButton_3_clicked();
+    void on_pushButton_6_clicked();
+    void on_pushButton_5_clicked();
+    void on_pushButton_7_clicked();
+    void on_pushButton_8_clicked();
     void on_lineEdit_textChanged(const QString &arg1);
     void on_lineEdit_2_textEdited(const QString &arg1);
+    void on_comboBox_2_activated(const QString &arg1);
+    void on_comboBox_4_activated(int index);
 };
 
 #endif // MAINWINDOW_H

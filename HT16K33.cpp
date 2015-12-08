@@ -2,7 +2,7 @@
  * HT16K33.c
  *
  *  Created on: 26.10.2015
- *      Author: Jonas Heim
+ *      Author: Jonas Heim/Alexander Rabenstein
  */
 
 #include <fcntl.h>
@@ -63,6 +63,7 @@ void ht16k33_print_array(int fd, unsigned char arr8x8[8]) {
     for (int i = 0; i < 8 ; i++) {
         ht16k33_write_byte(fd, row_address[7-i], arr8x8[i]);
     }
+}
 //Initialize the HT16K33-Controller
 int ht16k33_init_i2c() {
     int fd;
