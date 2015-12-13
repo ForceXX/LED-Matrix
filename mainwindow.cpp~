@@ -1,16 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include "HT16K33.h"
 #include <unistd.h>
-#include <QFile>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QString>
-#include <QTextStream>
-
-using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     matrix_row_6 = 0x00;
     matrix_row_7 = 0x00;
 
-    isInverted=false;
-
     display_setting = 0x81;
 }
 
@@ -43,29 +33,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_2_clicked()
 {
     QString eingabe = ui->lineEdit_2->text();
-    //Laufschrift von links nach rechts
-    if(ui->radioButton->isChecked()){
-        ht16k33_print_right(fd, eingabe.toUtf8().data());
-    }
-    //Laufschrift von rechts nach links
-    else if(ui->radioButton_2->isChecked()){
-        ht16k33_print_left(fd, eingabe.toUtf8().data());
-    }
-    //Laufschrift von oben nach unten
-    else if(ui->radioButton_3->isChecked()){
-
-    }
-    //Laufschrift von unten nach oben
-    else if(ui->radioButton_4->isChecked()){
-
-    }
-    //Jedes Zeichen einzeln zeichnen
-    else if(ui->radioButton_5->isChecked()){
-        ht16k33_print_string(fd, eingabe.toUtf8().data());
-    }
-    //Sonst
-    else{
-    }
+    ht16k33_print_left(fd, eingabe.toUtf8().data());
     ui->lineEdit_2->clear();
     ui->pushButton_2->setEnabled(false);
 }
@@ -124,24 +92,16 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 //Muster an Matrix senden
 void MainWindow::on_pushButton_clicked()
 {
-
-    if(isInverted){
-        unsigned char arr[8] = {~matrix_row_0,~matrix_row_1,~matrix_row_2,~matrix_row_3,~matrix_row_4,~matrix_row_5,~matrix_row_6,~matrix_row_7};
-        ht16k33_print_array(fd, arr);
-
-    }else{
-        unsigned char arr[8] = {matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7};
-        ht16k33_print_array(fd, arr);
-    }
-
-//    printf("%x\n",matrix_row_0);
-//    printf("%x\n",matrix_row_1);
-//    printf("%x\n",matrix_row_2);
-//    printf("%x\n",matrix_row_3);
-//    printf("%x\n",matrix_row_4);
-//    printf("%x\n",matrix_row_5);
-//    printf("%x\n",matrix_row_6);
-//    printf("%x\n",matrix_row_7);
+    unsigned char arr[8] = {matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7};
+    ht16k33_print_array(fd, arr);
+    printf("%x\n",matrix_row_0);
+    printf("%x\n",matrix_row_1);
+    printf("%x\n",matrix_row_2);
+    printf("%x\n",matrix_row_3);
+    printf("%x\n",matrix_row_4);
+    printf("%x\n",matrix_row_5);
+    printf("%x\n",matrix_row_6);
+    printf("%x\n",matrix_row_7);
 
 }
 
@@ -169,7 +129,7 @@ void MainWindow::on_comboBox_activated(int index)
 {
     switch(index){
         case 0://Kein Blinken
-            display_setting &= ~(0x3<<1);
+            display_setting &= ~(0x3<<2);
             printf("0 %x\n",display_setting);
             ht16k33_write_command(fd, display_setting);
             break;
@@ -848,13 +808,11 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
 //Alle löschen
 void MainWindow::on_pushButton_4_clicked()
 {
-
-    QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
-    for (int i=0; i<allButtons.size();i++){
-        allButtons.at(i)->setChecked(true);
-        allButtons.at(i)->click();
+    QListIterator<QObject *> list = ui->gridGroupBox->children();
+    while(list.hasNext()){
+        QCheckBox *b = qobject_cast<QCheckBox*>(list.next());
+        //b.setChecked(false);
     }
-
 
 }
 
@@ -862,11 +820,6 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_3_clicked()
 {
 
-    QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
-    for (int i=0; i<allButtons.size();i++){
-        allButtons.at(i)->setChecked(false);
-        allButtons.at(i)->click();
-    }
 }
 
 //Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable
@@ -879,154 +832,5 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         ui->pushButton_5->setEnabled(false);
     }
 }
-
-
-//Muster speichern
-void MainWindow::on_pushButton_5_clicked(){
-    QString filename="Muster.txt";
-
-    QFile *file = new QFile(filename);
-    if(!file->open(QFile::WriteOnly)){
-        QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
-
-    }else{
-        QString toWrite;
-        toWrite=ui->lineEdit->text();
-
-        //Falls Leerzeichen vorhanden, also mehr als ein Wort, wird der Rest gelöscht
-       for (int i=0;i<toWrite.length();i++){
-           fprintf(stderr, "In for-Schleife: %s", toWrite.at(i));
-           if(toWrite.at(i)==' '){
-                QChar eingabe[i];
-                for(int j=0;j<i;j++){
-                    eingabe[j]=toWrite.at(j);
-                }
-                QString lokal(eingabe);
-                toWrite=lokal;
-           }
-        }
-
-//        QString qrow_0(matrix_row_0);
-//        if (matrix_row_0==0x00)
-//            qrow_0='9';
-
-//        QString qrow_1(matrix_row_1);
-//        if (matrix_row_1==0x00)
-//            qrow_1='9';
-
-//        QString qrow_2(matrix_row_2);
-//        if (matrix_row_2==0x00)
-//            qrow_2='9';
-
-//        QString qrow_3(matrix_row_3);
-//        if (matrix_row_3==0x00)
-//            qrow_3='9';
-
-//        QString qrow_4(matrix_row_4);
-//        if (matrix_row_3==0x00)
-//            qrow_3='9';
-
-//        QString qrow_5(matrix_row_5);
-//        if (matrix_row_5==0x00)
-//            qrow_5='9';
-
-//        QString qrow_6(matrix_row_6);
-//        if (matrix_row_6==0x00)
-//            qrow_6='9';
-
-//        QString qrow_7(matrix_row_7);
-//        if (matrix_row_7==0x00)
-//            qrow_7='9';
-
-//        toWrite += " " + qrow_0+ " "+qrow_1+" " + qrow_2 + " " + qrow_3 + " " + qrow_4 + " " + qrow_5 + " " + qrow_6 + " " + qrow_7 + "\n";
-
-//        file->write(toWrite.toUtf8().data(),toWrite.length());
-
-//        ui->lineEdit->clear();
-//        ui->pushButton_5->setEnabled(false);
-//        on_pushButton_8_clicked();
-
-    }
-
-
-}
-
-
-//Musterauswahl aktualisieren
-void MainWindow::on_pushButton_8_clicked(){
-    ui->comboBox_3->clear();
-
-    const char* const filename="Muster.txt";
-    FILE *fp;
-
-    char puffer[100];
-    if((fp=fopen(filename, "r"))==NULL){
-        fprintf(stderr, "Kann %s nicht oeffnen\n", filename);
-        return;
-    }
-    //int size=0;
-    fprintf(stderr, "Vor while\n");
-    while(fgets(puffer, 100, fp)){
-        //size=sizeof(puffer)/sizeof(char);
-        for (int i=0;i<100;i++){
-            if(puffer[i]==' '){
-                //fprintf(stderr, "Char: %i", puffer[i-1]);
-                char puffer2[i];
-                for(int j=0;j<i;j++){
-                    puffer2[i]=puffer[i];
-
-                }
-                ui->comboBox_3->addItem(puffer2);
-                break;
-            }
-        }
-
-    }
-}
-
-//Muster laden
-
-void MainWindow::on_pushButton_7_clicked(){
-    QString filename="Muster.txt";
-
-    QFile file(filename);
-
-    QStringList lines;
-
-    while(!file.atEnd())
-        lines.append(file.readLine());
-
-    for (int i=0;i<lines.size();i++){
-
-    }
-    //TODO
-
-}
-
-//Invertieren an/aus
-void MainWindow::on_comboBox_4_activated(int index){
-
-    switch(index){
-        case 0://Display normal
-            isInverted=false;
-            on_pushButton_clicked();
-            break;
-        case 1://Display invertiert
-            isInverted=true;
-            on_pushButton_clicked();
-            break;
-        default://Display normal
-            isInverted=false;
-            on_pushButton_clicked();
-            break;
-    }
-}
-
-
-//Muster aus Datei löschen
-void MainWindow::on_pushButton_6_clicked(){
-    //TODO
-}
-
 
 

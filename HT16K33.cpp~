@@ -2,7 +2,7 @@
  * HT16K33.c
  *
  *  Created on: 26.10.2015
- *      Author: Jonas Heim/Alexander Rabenstein
+ *      Author: Jonas Heim
  */
 
 #include <fcntl.h>
@@ -63,7 +63,6 @@ void ht16k33_print_array(int fd, unsigned char arr8x8[8]) {
     for (int i = 0; i < 8 ; i++) {
         ht16k33_write_byte(fd, row_address[7-i], arr8x8[i]);
     }
-}
 //Initialize the HT16K33-Controller
 int ht16k33_init_i2c() {
     int fd;
@@ -97,10 +96,10 @@ void ht16k33_print_string(int fd, char input[]) {
  * Scrolls two chars from the right to the left
  */
 void ht16k33_scroll_chars_left(int fd, unsigned char char1[], unsigned char char2[]){
-    for(int j = 1; j <= 8; j++){
+    for(int j = 0; j < 8; j++){
         for (int i = 0; i < 8 ; i++) {
                     ht16k33_write_byte(fd, row_address[7-i],((char1[i]<<j)|(char2[i]>>(8-j)) ) );
-                    //printf("row%d: %x\n",7-i,(char)(char1[i]<<j)|(char2[i]>>(8-j)) );
+                    printf("row%d: %x\n",7-i,(char)(char1[i]<<j)|(char2[i]>>(8-j)) );
         }
         usleep(SCROLL_WAIT);
     }
@@ -114,18 +113,17 @@ void ht16k33_print_left(int fd, char s[]){
         for(int i = 0; i <size; i++){
             ht16k33_scroll_chars_left(fd, charInHex(s[i]), charInHex(s[i+1]));
         }
-        usleep(SCROLL_WAIT_STILL);
-        ht16k33_clear(fd);
+
 }
 
 /*
  * Scrolls two chars from the left to the right
  */
 void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char char2[]){
-    for(int j = 1; j <= 8; j++){
+    for(int j = 0; j < 8; j++){
         for (int i = 0; i < 8 ; i++) {
-                    ht16k33_write_byte(fd, row_address[7-i],((char1[i]<<(8-j))|(char2[i]>>j) ) );
-                    //printf("row%d: %x\n",7-i,(char)(char1[i]>>j)|(char2[i]<<(8-j)) );
+                    ht16k33_write_byte(fd, row_address[7-i],((char1[i]>>j)|(char2[i]<<(8-j)) ) );
+                    printf("row%d: %x\n",7-i,(char)(char1[i]>>j)|(char2[i]<<(8-j)) );
         }
         usleep(SCROLL_WAIT);
     }
@@ -137,10 +135,9 @@ void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char cha
 void ht16k33_print_right(int fd, char s[]){
         int size = strlen(s)-1;
         for(int i = 0; i <size; i++){
-            ht16k33_scroll_chars_right(fd, charInHex(s[i]), charInHex(s[i+1]));
+            ht16k33_scroll_chars_left(fd, charInHex(s[i]), charInHex(s[i+1]));
         }
-        usleep(SCROLL_WAIT_STILL);
-        ht16k33_clear(fd);
+
 }
 
 //Sets given LED with coordinates X=posX, Y=posY to 1, if value != 0, else to 0

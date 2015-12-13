@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -62,13 +62,13 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>240</y>
+        <y>270</y>
         <width>161</width>
-        <height>181</height>
+        <height>171</height>
        </rect>
       </property>
       <property name="title">
-       <string/>
+       <string>Richtung der Laufschrift</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -126,19 +126,6 @@
        </property>
        <property name="text">
         <string>Oben -&gt; Unten</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton_5">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>121</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Einzelne Zeichen</string>
        </property>
       </widget>
      </widget>
@@ -1120,19 +1107,6 @@
        <string>Senden</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>10</y>
-        <width>85</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Aktualisieren</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -1217,7 +1191,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>70</y>
+         <y>60</y>
          <width>55</width>
          <height>17</height>
         </rect>
@@ -1230,7 +1204,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>130</y>
+         <y>100</y>
          <width>55</width>
          <height>17</height>
         </rect>
@@ -1243,7 +1217,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>150</y>
+         <y>120</y>
          <width>160</width>
          <height>21</height>
         </rect>
@@ -1266,39 +1240,6 @@
        <property name="invertedAppearance">
         <bool>false</bool>
        </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>90</y>
-         <width>81</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Invertieren</string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="comboBox_4">
-       <property name="geometry">
-        <rect>
-         <x>130</x>
-         <y>90</y>
-         <width>78</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <item>
-        <property name="text">
-         <string>Aus</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>An</string>
-        </property>
-       </item>
       </widget>
      </widget>
     </widget>

@@ -21,9 +21,8 @@ HEADERS  += mainwindow.h \
     HT16K33.h \
     util.h
 
-FORMS    += \
-    mainwindow.ui
+FORMS    += mainwindow.ui
 
-target.path=/home/pi/8x8Matrix/GUI
+target.path=/home/pi/8x8Matrix/GUI/
 
 INSTALLS+=target

@@ -2,7 +2,7 @@
  * HT16K33.h
  *
  *  Created on: 26.10.2015
- *      Author: Jonas Heim/Alexander Rabenstein
+ *      Author: Jonas Heim
  */
 
 
@@ -13,7 +13,6 @@
 #include "util.h"
 
 #define SCROLL_WAIT 100000
-#define SCROLL_WAIT_STILL 500000
 
 /*
  * Prototypen
