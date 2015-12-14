@@ -51,14 +51,6 @@ void MainWindow::on_pushButton_2_clicked()
     else if(ui->radioButton_2->isChecked()){
         ht16k33_print_left(fd, eingabe.toUtf8().data());
     }
-    //Laufschrift von oben nach unten
-    else if(ui->radioButton_3->isChecked()){
-
-    }
-    //Laufschrift von unten nach oben
-    else if(ui->radioButton_4->isChecked()){
-
-    }
     //Jedes Zeichen einzeln zeichnen
     else if(ui->radioButton_5->isChecked()){
         ht16k33_print_string(fd, eingabe.toUtf8().data());
@@ -126,7 +118,9 @@ void MainWindow::on_pushButton_clicked()
 {
 
     if(isInverted){
-        unsigned char arr[8] = {~matrix_row_0,~matrix_row_1,~matrix_row_2,~matrix_row_3,~matrix_row_4,~matrix_row_5,~matrix_row_6,~matrix_row_7};
+        unsigned char arr[8] = {(unsigned char)~matrix_row_0,(unsigned char)~matrix_row_1,(unsigned char)~matrix_row_2,
+                                (unsigned char)~matrix_row_3,(unsigned char)~matrix_row_4,(unsigned char)~matrix_row_5,
+                                (unsigned char)~matrix_row_6,(unsigned char)~matrix_row_7};
         ht16k33_print_array(fd, arr);
 
     }else{
@@ -883,68 +877,58 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
 //Muster speichern
 void MainWindow::on_pushButton_5_clicked(){
-    QString filename="Muster.txt";
+    QString filename="./Muster.txt";
 
     QFile *file = new QFile(filename);
-    if(!file->open(QFile::WriteOnly)){
+    if(!file->open(QFile::Append|QFile::Text)){
         QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
-
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
+        toWrite = toWrite.split(" ")[0];
 
-        //Falls Leerzeichen vorhanden, also mehr als ein Wort, wird der Rest gelöscht
-       for (int i=0;i<toWrite.length();i++){
-           fprintf(stderr, "In for-Schleife: %s", toWrite.at(i));
-           if(toWrite.at(i)==' '){
-                QChar eingabe[i];
-                for(int j=0;j<i;j++){
-                    eingabe[j]=toWrite.at(j);
-                }
-                QString lokal(eingabe);
-                toWrite=lokal;
-           }
-        }
 
-//        QString qrow_0(matrix_row_0);
-//        if (matrix_row_0==0x00)
-//            qrow_0='9';
+        QString qrow_0(matrix_row_0);
+        if (matrix_row_0==0x00)
+            qrow_0='9';
 
-//        QString qrow_1(matrix_row_1);
-//        if (matrix_row_1==0x00)
-//            qrow_1='9';
+        QString qrow_1(matrix_row_1);
+        if (matrix_row_1==0x00)
+            qrow_1='9';
 
-//        QString qrow_2(matrix_row_2);
-//        if (matrix_row_2==0x00)
-//            qrow_2='9';
+        QString qrow_2(matrix_row_2);
+        if (matrix_row_2==0x00)
+            qrow_2='9';
 
-//        QString qrow_3(matrix_row_3);
-//        if (matrix_row_3==0x00)
-//            qrow_3='9';
+        QString qrow_3(matrix_row_3);
+        if (matrix_row_3==0x00)
+            qrow_3='9';
 
-//        QString qrow_4(matrix_row_4);
-//        if (matrix_row_3==0x00)
-//            qrow_3='9';
+        QString qrow_4(matrix_row_4);
+        if (matrix_row_3==0x00)
+            qrow_3='9';
 
-//        QString qrow_5(matrix_row_5);
-//        if (matrix_row_5==0x00)
-//            qrow_5='9';
+        QString qrow_5(matrix_row_5);
+        if (matrix_row_5==0x00)
+            qrow_5='9';
 
-//        QString qrow_6(matrix_row_6);
-//        if (matrix_row_6==0x00)
-//            qrow_6='9';
+        QString qrow_6(matrix_row_6);
+        if (matrix_row_6==0x00)
+            qrow_6='9';
 
-//        QString qrow_7(matrix_row_7);
-//        if (matrix_row_7==0x00)
-//            qrow_7='9';
+        QString qrow_7(matrix_row_7);
+        if (matrix_row_7==0x00)
+            qrow_7='9';
 
-//        toWrite += " " + qrow_0+ " "+qrow_1+" " + qrow_2 + " " + qrow_3 + " " + qrow_4 + " " + qrow_5 + " " + qrow_6 + " " + qrow_7 + "\n";
+        toWrite += " " + qrow_0+ " "+qrow_1+" " + qrow_2 + " " + qrow_3 + " " + qrow_4 + " " + qrow_5 + " " + qrow_6 + " " + qrow_7 + "\n";
 
-//        file->write(toWrite.toUtf8().data(),toWrite.length());
-
-//        ui->lineEdit->clear();
-//        ui->pushButton_5->setEnabled(false);
-//        on_pushButton_8_clicked();
+        file->write(toWrite.toUtf8().data());
+        file->flush();
+        file->close();
+        ui->lineEdit->clear();
+        ui->pushButton_5->setEnabled(false);
+        on_pushButton_4_clicked();
+        on_pushButton_8_clicked();
 
     }
 
@@ -952,55 +936,56 @@ void MainWindow::on_pushButton_5_clicked(){
 }
 
 
-//Musterauswahl aktualisieren
+//Musterauswahl aus Datei aktualisieren
 void MainWindow::on_pushButton_8_clicked(){
     ui->comboBox_3->clear();
+    QString filename="Muster.txt";
+    QFile *file = new QFile(filename);
 
-    const char* const filename="Muster.txt";
-    FILE *fp;
-
-    char puffer[100];
-    if((fp=fopen(filename, "r"))==NULL){
-        fprintf(stderr, "Kann %s nicht oeffnen\n", filename);
+    if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
+        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");
         return;
+    }else{
+        QTextStream input(file);
+        while(!input.atEnd()){
+            QString line = input.readLine();
+            QStringList list = line.split(" ");
+            ui->comboBox_3->addItem(list[0]);
+        }
+        file->close();
     }
-    //int size=0;
-    fprintf(stderr, "Vor while\n");
-    while(fgets(puffer, 100, fp)){
-        //size=sizeof(puffer)/sizeof(char);
-        for (int i=0;i<100;i++){
-            if(puffer[i]==' '){
-                //fprintf(stderr, "Char: %i", puffer[i-1]);
-                char puffer2[i];
-                for(int j=0;j<i;j++){
-                    puffer2[i]=puffer[i];
+}
 
-                }
-                ui->comboBox_3->addItem(puffer2);
+
+//Muster an Matrix senden
+void MainWindow::on_pushButton_7_clicked(){
+    QString name = ui->comboBox_3->currentText();
+
+    QString filename="Muster.txt";
+    QFile *file = new QFile(filename);
+
+    if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
+        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");
+        return;
+    }else{
+        QTextStream input(file);
+        while(!input.atEnd()){
+            QString line = input.readLine();
+            QStringList list = line.split(" ");
+            //Überprüfe ob Name in Datei vorhanden
+            if(list[0] == name){
+                fprintf(stderr, "Gefunden");
+                //TODO Werte auslesen und an Matrix schicken
+                break;
+            }
+            else{
+                QMessageBox error;
+                error.critical(0,"Fehler","Muster nicht in der Datei vorhanden");
                 break;
             }
         }
-
+        file->close();
     }
-}
-
-//Muster laden
-
-void MainWindow::on_pushButton_7_clicked(){
-    QString filename="Muster.txt";
-
-    QFile file(filename);
-
-    QStringList lines;
-
-    while(!file.atEnd())
-        lines.append(file.readLine());
-
-    for (int i=0;i<lines.size();i++){
-
-    }
-    //TODO
-
 }
 
 //Invertieren an/aus

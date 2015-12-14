@@ -51,7 +51,6 @@ private slots:
     void on_checkBox_1_3_clicked(bool checked);
     void on_checkBox_1_2_clicked(bool checked);
     void on_checkBox_1_1_clicked(bool checked);
-    void on_checkBox_1_0_pressed();
     void on_checkBox_1_0_clicked(bool checked);
     void on_checkBox_2_0_clicked(bool checked);
     void on_checkBox_2_1_clicked(bool checked);
@@ -68,7 +67,6 @@ private slots:
     void on_checkBox_3_3_clicked(bool checked);
     void on_checkBox_3_2_clicked(bool checked);
     void on_checkBox_3_1_clicked(bool checked);
-    void on_checkBox_3_0_pressed();
     void on_checkBox_3_0_clicked(bool checked);
     void on_checkBox_4_7_clicked(bool checked);
     void on_checkBox_4_6_clicked(bool checked);
@@ -110,7 +108,6 @@ private slots:
     void on_pushButton_8_clicked();
     void on_lineEdit_textChanged(const QString &arg1);
     void on_lineEdit_2_textEdited(const QString &arg1);
-    void on_comboBox_2_activated(const QString &arg1);
     void on_comboBox_4_activated(int index);
 };
 
