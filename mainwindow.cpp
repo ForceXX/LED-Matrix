@@ -879,46 +879,48 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 void MainWindow::on_pushButton_5_clicked(){
     QString filename="./Muster.txt";
 
+    
     QFile *file = new QFile(filename);
     if(!file->open(QFile::Append|QFile::Text)){
         QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
+        //Nur bis zum ersten Leerzeichen speichern
         toWrite = toWrite.split(" ")[0];
 
 
         QString qrow_0(matrix_row_0);
         if (matrix_row_0==0x00)
-            qrow_0='9';
+            qrow_0='0';
 
         QString qrow_1(matrix_row_1);
         if (matrix_row_1==0x00)
-            qrow_1='9';
+            qrow_1='0';
 
         QString qrow_2(matrix_row_2);
         if (matrix_row_2==0x00)
-            qrow_2='9';
+            qrow_2='0';
 
         QString qrow_3(matrix_row_3);
         if (matrix_row_3==0x00)
-            qrow_3='9';
+            qrow_3='0';
 
         QString qrow_4(matrix_row_4);
         if (matrix_row_3==0x00)
-            qrow_3='9';
+            qrow_3='0';
 
         QString qrow_5(matrix_row_5);
         if (matrix_row_5==0x00)
-            qrow_5='9';
+            qrow_5='0';
 
         QString qrow_6(matrix_row_6);
         if (matrix_row_6==0x00)
-            qrow_6='9';
+            qrow_6='0';
 
         QString qrow_7(matrix_row_7);
         if (matrix_row_7==0x00)
-            qrow_7='9';
+            qrow_7='0';
 
         toWrite += " " + qrow_0+ " "+qrow_1+" " + qrow_2 + " " + qrow_3 + " " + qrow_4 + " " + qrow_5 + " " + qrow_6 + " " + qrow_7 + "\n";
 
@@ -936,7 +938,7 @@ void MainWindow::on_pushButton_5_clicked(){
 }
 
 
-//Musterauswahl aus Datei aktualisieren
+//Musterauswahl aus Datei aktualisieren und in Combobox Speichern
 void MainWindow::on_pushButton_8_clicked(){
     ui->comboBox_3->clear();
     QString filename="Muster.txt";
