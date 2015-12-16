@@ -886,17 +886,24 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 //Gesetztes Muster in Datei speichern:
 void MainWindow::on_pushButton_5_clicked(){
 
+<<<<<<< HEAD
     char* filename="./Muster";
 
     
     FILE *file;
     file = fopen(filename,"a");
     if(!file){
+=======
+    
+    QFile *file = new QFile(filename);
+    if(!file->open(QFile::Append|QFile::Text)){
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
         QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
         
+<<<<<<< HEAD
         printf("Speichern von %s ",toWrite.toUtf8().data());
         printf("%x %x %x %x %x %x %x %x\n",matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,
                matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7);
@@ -923,10 +930,53 @@ void MainWindow::on_pushButton_5_clicked(){
         fputc(matrix_row_7,file);
         fputc(' ',file);
         fputc('\n',file);
+=======
+        //Nur bis zum ersten Leerzeichen speichern
+        toWrite = toWrite.split(" ")[0];
+
+
+        QString qrow_0(matrix_row_0);
+        if (matrix_row_0==0x00)
+            qrow_0='0';
+
+        QString qrow_1(matrix_row_1);
+        if (matrix_row_1==0x00)
+            qrow_1='0';
+
+        QString qrow_2(matrix_row_2);
+        if (matrix_row_2==0x00)
+            qrow_2='0';
+
+        QString qrow_3(matrix_row_3);
+        if (matrix_row_3==0x00)
+            qrow_3='0';
+
+        QString qrow_4(matrix_row_4);
+        if (matrix_row_3==0x00)
+            qrow_3='0';
+
+        QString qrow_5(matrix_row_5);
+        if (matrix_row_5==0x00)
+            qrow_5='0';
+
+        QString qrow_6(matrix_row_6);
+        if (matrix_row_6==0x00)
+            qrow_6='0';
+
+        QString qrow_7(matrix_row_7);
+        if (matrix_row_7==0x00)
+            qrow_7='0';
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
 
         fflush(file);
         fclose(file);
 
+<<<<<<< HEAD
+=======
+        file->write(toWrite.toUtf8().data());
+        file->flush();
+        file->close();
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
         ui->lineEdit->clear();//Textfeld leeren
         ui->pushButton_5->setEnabled(false);//"Speichern-Button" nicht anklickbar
         on_pushButton_4_clicked();//Musterauswahl löschen
