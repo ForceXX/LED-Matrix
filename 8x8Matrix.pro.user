@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.0.1, 2015-12-14T18:15:08. -->
+<!-- Written by QtCreator 3.0.1, 2015-12-16T15:12:35. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -396,44 +396,44 @@
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
-       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
-       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
-       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
+       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
-       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
+       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
+       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
+       <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Release/8x8Matrix</value>
        <value type="QString">/home/vmuser/qtprojects/build-8x8Matrix-RPi-Debug/8x8Matrix</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
        <value type="QString">192.168.0.27</value>
-       <value type="QString">192.168.2.139</value>
-       <value type="QString">192.168.10.26</value>
        <value type="QString">192.168.0.27</value>
        <value type="QString">192.168.0.27</value>
        <value type="QString">192.168.2.139</value>
        <value type="QString">10.8.9.125</value>
-       <value type="QString">192.168.0.27</value>
-       <value type="QString">192.168.0.27</value>
+       <value type="QString">192.168.10.26</value>
+       <value type="QString">192.168.2.139</value>
+       <value type="QString">10.8.9.125</value>
        <value type="QString">192.168.10.26</value>
        <value type="QString">192.168.0.27</value>
-       <value type="QString">10.8.9.125</value>
+       <value type="QString">192.168.0.27</value>
+       <value type="QString">192.168.0.27</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedRemotePaths">
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
        <value type="QString">/home/pi/8x8Matrix</value>
        <value type="QString">/home/pi/8x8Matrix/GUI</value>
        <value type="QString">/home/pi/8x8Matrix/GUI/</value>
        <value type="QString">/home/pi/8x8Matrix/GUI/</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
        <value type="QString">/home/pi/8x8Matrix/GUI</value>
+       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
        <value type="QString">/home/pi/8x8Matrix</value>
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
-       <value type="QString">/home/pi/8x8Matrix/GUI/</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString">/mnt/rasp-pi-rootfs</value>
@@ -450,18 +450,18 @@
        <value type="QString">/mnt/rasp-pi-rootfs</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
-       <value type="QDateTime">2015-11-15T16:25:22</value>
-       <value type="QDateTime">2015-11-21T17:31:22</value>
-       <value type="QDateTime">2015-12-07T17:47:34</value>
-       <value type="QDateTime">2015-12-13T23:27:18</value>
-       <value type="QDateTime">2015-12-14T17:21:54</value>
-       <value type="QDateTime">2015-11-21T11:59:44</value>
-       <value type="QDateTime">2015-11-17T12:11:42</value>
-       <value type="QDateTime">2015-12-13T23:30:42</value>
        <value type="QDateTime">2015-12-13T23:27:40</value>
-       <value type="QDateTime">2015-12-07T17:01:04</value>
+       <value type="QDateTime">2015-12-16T15:11:49</value>
        <value type="QDateTime">2015-11-15T16:23:09</value>
+       <value type="QDateTime">2015-11-21T17:31:22</value>
+       <value type="QDateTime">2015-11-17T12:11:42</value>
+       <value type="QDateTime">2015-12-07T17:01:04</value>
+       <value type="QDateTime">2015-11-21T11:59:44</value>
        <value type="QDateTime">2015-11-17T13:14:33</value>
+       <value type="QDateTime">2015-12-07T17:47:34</value>
+       <value type="QDateTime">2015-12-13T23:30:42</value>
+       <value type="QDateTime">2015-11-15T16:25:22</value>
+       <value type="QDateTime">2015-12-13T23:27:18</value>
       </valuelist>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.IgnoreMissingFiles">false</value>
       <value type="bool" key="RemoteLinux.GenericDirectUploadStep.Incremental">true</value>
@@ -519,7 +519,7 @@
     </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">8x8Matrix (on Remote Device)</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/vmuser/qtprojects/LED-Matrix/8x8Matrix.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/vmuser/qtprojects/LED-Matrix-master/8x8Matrix.pro</value>
     <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.Arguments">
      <value type="QString">-platform</value>
      <value type="QString">xcb</value>

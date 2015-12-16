@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "HT16K33.h"
 #include <unistd.h>
 #include <QFile>
@@ -18,8 +19,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     fd = ht16k33_init_i2c();
+    
+    //Matrix leeren
     ht16k33_clear(fd);
-
+    
+    //Alle einzelnen Zeilen leeren
     matrix_row_0 = 0x00;
     matrix_row_1 = 0x00;
     matrix_row_2 = 0x00;
@@ -28,10 +32,14 @@ MainWindow::MainWindow(QWidget *parent) :
     matrix_row_5 = 0x00;
     matrix_row_6 = 0x00;
     matrix_row_7 = 0x00;
-
+    
+    //standardmäßig nicht invertieren
     isInverted=false;
-
+    
+    //Display anschalten
     display_setting = 0x81;
+
+    MainWindow::on_pushButton_8_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -57,12 +65,13 @@ void MainWindow::on_pushButton_2_clicked()
     }
     //Sonst
     else{
+        //TODO
     }
-    ui->lineEdit_2->clear();
-    ui->pushButton_2->setEnabled(false);
+    ui->lineEdit_2->clear();//Textfeld leeren
+    ui->pushButton_2->setEnabled(false);//Senden-Button nicht anklickbar
 }
 
-//Enable String-"Senden" Button wenn Textfeld nicht leer, sonst disable
+//Enable String-"Senden" Button wenn Textfeld nicht leer, sonst disable:
 void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
 {
     if(arg1 != ""){
@@ -73,7 +82,7 @@ void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
     }
 }
 
-//Helligkeit über horizontalen Slider einstellen (16 Stufen, default 16)
+//Helligkeit über horizontalen Slider einstellen (16 Stufen, default ganz hell(16)):
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     switch(value){
@@ -113,16 +122,17 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
     }
 }
 
-//Muster an Matrix senden
+//Gesetztes Muster an Matrix senden:
 void MainWindow::on_pushButton_clicked()
 {
-
+    //Wenn invertiert gewählt wurde
     if(isInverted){
         unsigned char arr[8] = {(unsigned char)~matrix_row_0,(unsigned char)~matrix_row_1,(unsigned char)~matrix_row_2,
                                 (unsigned char)~matrix_row_3,(unsigned char)~matrix_row_4,(unsigned char)~matrix_row_5,
                                 (unsigned char)~matrix_row_6,(unsigned char)~matrix_row_7};
         ht16k33_print_array(fd, arr);
-
+    
+    //Normale Ausgabe
     }else{
         unsigned char arr[8] = {matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7};
         ht16k33_print_array(fd, arr);
@@ -139,7 +149,7 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-//Combobox Display An<->Aus
+//Combobox Display An<->Aus:
 void MainWindow::on_comboBox_2_activated(int index)
 {
     switch(index){
@@ -158,7 +168,7 @@ void MainWindow::on_comboBox_2_activated(int index)
     }
 }
 
-//Combobox Blinken Kein<->0.5Hz<->1Hz<->2Hz
+//Combobox Blinken Kein<->0.5Hz<->1Hz<->2Hz:
 void MainWindow::on_comboBox_activated(int index)
 {
     switch(index){
@@ -839,7 +849,7 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
     }
 }
 
-//Alle löschen
+//Muster komplett löschen:
 void MainWindow::on_pushButton_4_clicked()
 {
 
@@ -848,11 +858,9 @@ void MainWindow::on_pushButton_4_clicked()
         allButtons.at(i)->setChecked(true);
         allButtons.at(i)->click();
     }
-
-
 }
 
-//Alle setzen
+//Muster komplett setzen:
 void MainWindow::on_pushButton_3_clicked()
 {
 
@@ -863,7 +871,7 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-//Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable
+//Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1 != ""){
@@ -875,71 +883,64 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 }
 
 
-//Muster speichern
+//Gesetztes Muster in Datei speichern:
 void MainWindow::on_pushButton_5_clicked(){
-    QString filename="./Muster.txt";
 
-    QFile *file = new QFile(filename);
-    if(!file->open(QFile::Append|QFile::Text)){
+    char* filename="./Muster";
+
+    
+    FILE *file;
+    file = fopen(filename,"a");
+    if(!file){
         QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
+        
+        printf("Speichern von %s ",toWrite.toUtf8().data());
+        printf("%x %x %x %x %x %x %x %x\n",matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,
+               matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7);
+
+        //Nur bis zum ersten Leerzeichen speichern
         toWrite = toWrite.split(" ")[0];
 
+        fputs(toWrite.toUtf8().data(),file);
+        fputc(' ',file);
+        fputc(matrix_row_0,file);
+        fputc(' ',file);
+        fputc(matrix_row_1,file);
+        fputc(' ',file);
+        fputc(matrix_row_2,file);
+        fputc(' ',file);
+        fputc(matrix_row_3,file);
+        fputc(' ',file);
+        fputc(matrix_row_4,file);
+        fputc(' ',file);
+        fputc(matrix_row_5,file);
+        fputc(' ',file);
+        fputc(matrix_row_6,file);
+        fputc(' ',file);
+        fputc(matrix_row_7,file);
+        fputc(' ',file);
+        fputc('\n',file);
 
-        QString qrow_0(matrix_row_0);
-        if (matrix_row_0==0x00)
-            qrow_0='9';
+        fflush(file);
+        fclose(file);
 
-        QString qrow_1(matrix_row_1);
-        if (matrix_row_1==0x00)
-            qrow_1='9';
-
-        QString qrow_2(matrix_row_2);
-        if (matrix_row_2==0x00)
-            qrow_2='9';
-
-        QString qrow_3(matrix_row_3);
-        if (matrix_row_3==0x00)
-            qrow_3='9';
-
-        QString qrow_4(matrix_row_4);
-        if (matrix_row_3==0x00)
-            qrow_3='9';
-
-        QString qrow_5(matrix_row_5);
-        if (matrix_row_5==0x00)
-            qrow_5='9';
-
-        QString qrow_6(matrix_row_6);
-        if (matrix_row_6==0x00)
-            qrow_6='9';
-
-        QString qrow_7(matrix_row_7);
-        if (matrix_row_7==0x00)
-            qrow_7='9';
-
-        toWrite += " " + qrow_0+ " "+qrow_1+" " + qrow_2 + " " + qrow_3 + " " + qrow_4 + " " + qrow_5 + " " + qrow_6 + " " + qrow_7 + "\n";
-
-        file->write(toWrite.toUtf8().data());
-        file->flush();
-        file->close();
-        ui->lineEdit->clear();
-        ui->pushButton_5->setEnabled(false);
-        on_pushButton_4_clicked();
-        on_pushButton_8_clicked();
+        ui->lineEdit->clear();//Textfeld leeren
+        ui->pushButton_5->setEnabled(false);//"Speichern-Button" nicht anklickbar
+        on_pushButton_4_clicked();//Musterauswahl löschen
+        on_pushButton_8_clicked();//Musterauswahl in Combobox aktualisieren
 
     }
-
 
 }
 
 
-//Musterauswahl aus Datei aktualisieren
+//Musterauswahl aus Datei aktualisieren und in Combobox Speichern
 void MainWindow::on_pushButton_8_clicked(){
     ui->comboBox_3->clear();
-    QString filename="Muster.txt";
+    QString filename="Muster";
     QFile *file = new QFile(filename);
 
     if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
@@ -957,51 +958,43 @@ void MainWindow::on_pushButton_8_clicked(){
 }
 
 
-//Muster an Matrix senden
+//Gewähltes Muster aus Datei lesen und setzen:
 void MainWindow::on_pushButton_7_clicked(){
-    QString name = ui->comboBox_3->currentText();
+    char* name = ui->comboBox_3->currentText().toUtf8().data();
+    printf("Name Item: %s\n",name);
+    char * filename="Muster";
 
-    QString filename="Muster.txt";
-    QFile *file = new QFile(filename);
-
-    if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
-        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");
-        return;
-    }else{
-        QTextStream input(file);
-        while(!input.atEnd()){
-            QString line = input.readLine();
-            QStringList list = line.split(" ");
-            //Überprüfe ob Name in Datei vorhanden
-            if(list[0] == name){
-                fprintf(stderr, "Gefunden");
-                //TODO Werte auslesen und an Matrix schicken
-                break;
-            }
-            else{
-                QMessageBox error;
-                error.critical(0,"Fehler","Muster nicht in der Datei vorhanden");
-                break;
+    FILE *file;
+    file = fopen(filename,"r");
+    if(!file){
+        QMessageBox::critical(NULL,"Datei konnte nicht geöffnet werden", "OK");
+    }
+    else{
+        char zeile[256];
+        char *tmp;
+        while(fgets(zeile, sizeof(zeile),file)){
+            if(!strncmp(name,zeile,ui->comboBox_3->currentText().length())){
+                printf("Gleich - %s\n",zeile);
             }
         }
-        file->close();
     }
+
 }
 
-//Invertieren an/aus
+//Invertieren an/aus:
 void MainWindow::on_comboBox_4_activated(int index){
 
     switch(index){
         case 0://Display normal
-            isInverted=false;
-            on_pushButton_clicked();
+            isInverted=false;//Variable auf "false" "setzen
+            on_pushButton_clicked();//Muster nochmals senden
             break;
         case 1://Display invertiert
-            isInverted=true;
+            isInverted=true;//Variable auf "true" setzen
             on_pushButton_clicked();
             break;
-        default://Display normal
-            isInverted=false;
+        default://Display auch auf normal
+            isInverted=false;//Variable auf "false" "setzen
             on_pushButton_clicked();
             break;
     }
