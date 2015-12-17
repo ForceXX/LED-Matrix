@@ -38,7 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     
     //Display anschalten
     display_setting = 0x81;
-
+    
+    //Musterauswahl in ComboBox aus Textdatei aktualsieren, wenn vorhanden
     MainWindow::on_pushButton_8_clicked();
 }
 
@@ -63,9 +64,9 @@ void MainWindow::on_pushButton_2_clicked()
     else if(ui->radioButton_5->isChecked()){
         ht16k33_print_string(fd, eingabe.toUtf8().data());
     }
-    //Sonst
+    //Sonst Laufschrift von rechts nach links
     else{
-        //TODO
+        ht16k33_print_left(fd, eingabe.toUtf8().data());
     }
     ui->lineEdit_2->clear();//Textfeld leeren
     ui->pushButton_2->setEnabled(false);//Senden-Button nicht anklickbar
@@ -854,7 +855,7 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
 //Muster komplett löschen:
 void MainWindow::on_pushButton_4_clicked()
 {
-
+    //Jede einzelne CheckBox erst setzen und dann durch drücken auf nicht gefrückt setzen
     QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
     for (int i=0; i<allButtons.size();i++){
         allButtons.at(i)->setChecked(true);
@@ -865,7 +866,7 @@ void MainWindow::on_pushButton_4_clicked()
 //Muster komplett setzen:
 void MainWindow::on_pushButton_3_clicked()
 {
-
+    //Jede einzelne CheckBox erst auf ungedrückt setzen und dann durch drücken setzen
     QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
     for (int i=0; i<allButtons.size();i++){
         allButtons.at(i)->setChecked(false);
@@ -873,7 +874,7 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-//Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
+//Aktiviere "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1 != ""){
@@ -894,7 +895,8 @@ void MainWindow::on_pushButton_5_clicked(){
     FILE *file;
     file = fopen(filename,"a");
     if(!file){
-        QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
+        QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
+        return;
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
@@ -946,16 +948,16 @@ void MainWindow::on_pushButton_8_clicked(){
     QFile *file = new QFile(filename);
 
     if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
-        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");
+        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
         return;
     }else{
         QTextStream input(file);
         while(!input.atEnd()){
             QString line = input.readLine();
-            QStringList list = line.split(" ");
-            ui->comboBox_3->addItem(list[0]);
+            QStringList list = line.split(" ");//Bis zum ersten Leerzeichen einlesen
+            ui->comboBox_3->addItem(list[0]);//Mustername zur Auswahlliste hinzufügen
         }
-        file->close();
+        file->close();//Datei schließen
     }
 }
 
@@ -969,7 +971,8 @@ void MainWindow::on_pushButton_7_clicked(){
     FILE *file;
     file = fopen(filename,"r");
     if(!file){
-        QMessageBox::critical(NULL,"Datei konnte nicht geöffnet werden", "OK");
+        QMessageBox::critical(NULL,"Datei konnte nicht geöffnet werden", "OK");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
+        return;
     }
     else{
         char zeile[256];
@@ -986,6 +989,7 @@ void MainWindow::on_pushButton_7_clicked(){
                    printf("Gleich\n");
                    char *f = strchr(zeile, ' ');
                    char *c = ++f;
+                   //Variablen für die einzelnen Zeilen der Matrix setzen
                    matrix_row_0 = *c;
                    c+=2;
                    matrix_row_1 = *c;
@@ -1001,8 +1005,8 @@ void MainWindow::on_pushButton_7_clicked(){
                    matrix_row_6 = *c;
                    c+=2;
                    matrix_row_7 = *c;
-                   MainWindow::on_pushButton_clicked();
-                   break;
+                   MainWindow::on_pushButton_clicked();//Muster an Matrix senden
+                   break;//Schleifenabbruch
                }
            }
         }
@@ -1016,15 +1020,15 @@ void MainWindow::on_comboBox_4_activated(int index){
     switch(index){
         case 0://Display normal
             isInverted=false;//Variable auf "false" "setzen
-            on_pushButton_clicked();//Muster nochmals senden
+            on_pushButton_clicked();//Muster senden
             break;
         case 1://Display invertiert
             isInverted=true;//Variable auf "true" setzen
-            on_pushButton_clicked();
+            on_pushButton_clicked();//Muster senden
             break;
         default://Display auch auf normal
             isInverted=false;//Variable auf "false" "setzen
-            on_pushButton_clicked();
+            on_pushButton_clicked();//Muster senden
             break;
     }
 }
@@ -1036,16 +1040,17 @@ void MainWindow::on_pushButton_6_clicked(){
 
     QFile *file = new QFile(filename);
 
-    QString item = ui->comboBox_3->currentText();
+    QString item = ui->comboBox_3->currentText();//Gewähltes Muster bekommen
 
     if(!file->open(QFile::ReadWrite)){
-        QMessageBox::critical(NULL,"Fehler","Datei konnte nicht geöffnet werden");
+        QMessageBox::critical(NULL,"Fehler","Datei konnte nicht geöffnet werden");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
+        return;
     }
     else{
         QString newFile;
         QTextStream t(file);
         while(!t.atEnd()){
-            QString line = t.readLine();
+            QString line = t.readLine();//Zeilenweise lesen
             printf("Line: %s\n", line.toUtf8().data());
             if(!(line.split(' ')[0] == item)){
                 newFile.append(line + "\n");
@@ -1053,8 +1058,8 @@ void MainWindow::on_pushButton_6_clicked(){
         }
         file->resize(0);
         t << newFile;
-        file->close();
-        MainWindow::on_pushButton_8_clicked();
+        file->close();//Datei schließen
+        MainWindow::on_pushButton_8_clicked();//Auswahlliste durch Auslsen der Datei aktualisieren
     }
 }
 
