@@ -63,6 +63,10 @@ void MainWindow::on_pushButton_2_clicked()
     else if(ui->radioButton_5->isChecked()){
         ht16k33_print_string(fd, eingabe.toUtf8().data());
     }
+    //Sonst
+    else{
+        //TODO
+    }
     ui->lineEdit_2->clear();//Textfeld leeren
     ui->pushButton_2->setEnabled(false);//Senden-Button nicht anklickbar
 }
