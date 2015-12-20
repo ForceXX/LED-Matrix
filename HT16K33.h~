@@ -18,99 +18,18 @@
 /*
  * Prototypen
  */
-/*!
- \brief
-
- \param fd
- \param command
- \param data
-*/
 void ht16k33_write_byte (int fd, uint8_t command, uint8_t data );
-/*!
- \brief
-
- \param fd
- \param command
-*/
 void ht16k33_write_command (int fd, uint8_t command);
-/*!
- \brief
-
- \return int
-*/
 int ht16k33_init_i2c();
-/*!
- \brief
-
- \param int
-*/
 void ht16k33_clear(int);
-/*!
- \brief
-
- \param int
- \param
-*/
 void ht16k33_print_array(int, unsigned char*);
-/*!
- \brief
-
- \param int
- \param char[][]
-*/
 void ht16k33_print_array_dimm(int, unsigned char[8][8]);
-/*!
- \brief
-
- \param int
- \param
-*/
 void ht16k33_print_string(int, char*);
-/*!
- \brief
-
- \param int
- \param
- \param
-*/
 void ht16k33_scroll_chars_left(int, unsigned char*, unsigned char*);
-/*!
- \brief
-
- \param int
- \param
-*/
 void ht16k33_print_left(int, char*);
-/*!
- \brief
-
- \param int
- \param
- \param
-*/
 void ht16k33_scroll_chars_right(int, unsigned char*, unsigned char*);
-/*!
- \brief
-
- \param int
- \param
-*/
 void ht16k33_print_right(int, char*);
-/*!
- \brief
-
- \param int
- \param char
-*/
 void ht16k33_set_brigthness(int, unsigned char);
-/*!
- \brief
-
- \param int
- \param int
- \param int
- \param int
-*/
 void ht16k33_set_single_led(int,int,int,int);
 
 
