@@ -1233,11 +1233,14 @@ void MainWindow::on_pushButton_3_clicked()
 }
 
 //Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
+<<<<<<< HEAD
 /*!
  \brief
 
  \param arg1
 */
+=======
+>>>>>>> b97ca5331e5e45de817384a23c9a02351cfee581
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1 != ""){
