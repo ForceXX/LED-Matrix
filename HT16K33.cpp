@@ -16,6 +16,12 @@
 
 #include "HT16K33.h"
 
+/*!
+ \brief
+
+ \param fd
+ \param command
+*/
 void ht16k33_write_command(int fd, uint8_t command) {
     int result = i2c_smbus_write_byte(fd, command);
     if (result == -1) {
@@ -23,6 +29,13 @@ void ht16k33_write_command(int fd, uint8_t command) {
     }
 }
 
+/*!
+ \brief
+
+ \param fd
+ \param command
+ \param data
+*/
 void ht16k33_write_byte(int fd, uint8_t command, uint8_t data) {
     data = (data>>1)|(data<<7);
     int result = i2c_smbus_write_byte_data(fd, command, data);
@@ -31,6 +44,12 @@ void ht16k33_write_byte(int fd, uint8_t command, uint8_t data) {
     }
 }
 
+/*!
+ \brief
+
+ \param fd
+ \param arr8x8[][]
+*/
 void ht16k33_print_array_dimm(int fd, unsigned char arr8x8[8][8]) {
     unsigned char i, j;
     unsigned char arr[8] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
@@ -52,6 +71,11 @@ void ht16k33_print_array_dimm(int fd, unsigned char arr8x8[8][8]) {
 /*
  * Clears the LED-Matrix
  */
+/*!
+ \brief
+
+ \param fd
+*/
 void ht16k33_clear(int fd){
     ht16k33_print_array(fd, char_clean);
 }
@@ -59,12 +83,23 @@ void ht16k33_clear(int fd){
 /*
  * Prints given Arrays of 8 chars to the LED-Matrix
  */
+/*!
+ \brief
+
+ \param fd
+ \param arr8x8[]
+*/
 void ht16k33_print_array(int fd, unsigned char arr8x8[8]) {
     for (int i = 0; i < 8 ; i++) {
         ht16k33_write_byte(fd, row_address[7-i], arr8x8[i]);
     }
 }
 //Initialize the HT16K33-Controller
+/*!
+ \brief
+
+ \return int
+*/
 int ht16k33_init_i2c() {
     int fd;
     fd = open("/dev/i2c-1", O_RDWR);
@@ -85,6 +120,12 @@ int ht16k33_init_i2c() {
 }
 
 //Prints string, redraw every single character
+/*!
+ \brief
+
+ \param fd
+ \param input[]
+*/
 void ht16k33_print_string(int fd, char input[]) {
     int size = strlen(input);
     for (int i = 0; i < size; i++) {
@@ -96,6 +137,13 @@ void ht16k33_print_string(int fd, char input[]) {
 /*
  * Scrolls two chars from the right to the left
  */
+/*!
+ \brief
+
+ \param fd
+ \param char1[]
+ \param char2[]
+*/
 void ht16k33_scroll_chars_left(int fd, unsigned char char1[], unsigned char char2[]){
     for(int j = 1; j <= 8; j++){
         for (int i = 0; i < 8 ; i++) {
@@ -109,6 +157,12 @@ void ht16k33_scroll_chars_left(int fd, unsigned char char1[], unsigned char char
 /*
  * Scrolls the given char Array from the right to the left
  */
+/*!
+ \brief
+
+ \param fd
+ \param s[]
+*/
 void ht16k33_print_left(int fd, char s[]){
         int size = strlen(s)-1;
         for(int i = 0; i <size; i++){
@@ -121,6 +175,13 @@ void ht16k33_print_left(int fd, char s[]){
 /*
  * Scrolls two chars from the left to the right
  */
+/*!
+ \brief
+
+ \param fd
+ \param char1[]
+ \param char2[]
+*/
 void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char char2[]){
     for(int j = 1; j <= 8; j++){
         for (int i = 0; i < 8 ; i++) {
@@ -134,6 +195,12 @@ void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char cha
 /*
  * Scrolls the given char Array from the left to the right
  */
+/*!
+ \brief
+
+ \param fd
+ \param s[]
+*/
 void ht16k33_print_right(int fd, char s[]){
         int size = strlen(s)-1;
         for(int i = 0; i <size; i++){
@@ -144,6 +211,14 @@ void ht16k33_print_right(int fd, char s[]){
 }
 
 //Sets given LED with coordinates X=posX, Y=posY to 1, if value != 0, else to 0
+/*!
+ \brief
+
+ \param fd
+ \param posX
+ \param posY
+ \param value
+*/
 void ht16k33_set_single_led(int fd, int posX, int posY, int value){
     if(((posX<=7)&&(posX>=0)) && ((value==0)||(value==1))){
         ht16k33_write_byte(fd, row_address[posY], (value<<posX));
@@ -151,6 +226,12 @@ void ht16k33_set_single_led(int fd, int posX, int posY, int value){
 }
 
 //Sets brightness of the LEDs
+/*!
+ \brief
+
+ \param fd
+ \param brigthness
+*/
 void ht16k33_set_brigthness(int fd, unsigned char brigthness){
     ht16k33_write_command(fd, brigthness);
 }

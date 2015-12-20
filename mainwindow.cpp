@@ -13,6 +13,11 @@
 
 using namespace std;
 
+/*!
+ \brief
+
+ \param parent
+*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -38,17 +43,24 @@ MainWindow::MainWindow(QWidget *parent) :
     
     //Display anschalten
     display_setting = 0x81;
-    
-    //Musterauswahl in ComboBox aus Textdatei aktualsieren, wenn vorhanden
+
     MainWindow::on_pushButton_8_clicked();
 }
 
+/*!
+ \brief
+
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
 //String-"Senden" Button
+/*!
+ \brief
+
+*/
 void MainWindow::on_pushButton_2_clicked()
 {
     QString eingabe = ui->lineEdit_2->text();
@@ -64,15 +76,16 @@ void MainWindow::on_pushButton_2_clicked()
     else if(ui->radioButton_5->isChecked()){
         ht16k33_print_string(fd, eingabe.toUtf8().data());
     }
-    //Sonst Laufschrift von rechts nach links
-    else{
-        ht16k33_print_left(fd, eingabe.toUtf8().data());
-    }
     ui->lineEdit_2->clear();//Textfeld leeren
     ui->pushButton_2->setEnabled(false);//Senden-Button nicht anklickbar
 }
 
 //Enable String-"Senden" Button wenn Textfeld nicht leer, sonst disable:
+/*!
+ \brief
+
+ \param arg1
+*/
 void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
 {
     if(arg1 != ""){
@@ -84,6 +97,11 @@ void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
 }
 
 //Helligkeit über horizontalen Slider einstellen (16 Stufen, default ganz hell(16)):
+/*!
+ \brief
+
+ \param value
+*/
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     switch(value){
@@ -124,6 +142,10 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 }
 
 //Gesetztes Muster an Matrix senden:
+/*!
+ \brief
+
+*/
 void MainWindow::on_pushButton_clicked()
 {
     //Wenn invertiert gewählt wurde
@@ -135,9 +157,7 @@ void MainWindow::on_pushButton_clicked()
     
     //Normale Ausgabe
     }else{
-        unsigned char arr[8] = {(unsigned char)matrix_row_0,(unsigned char)matrix_row_1,(unsigned char)matrix_row_2,
-                                (unsigned char)matrix_row_3,(unsigned char)matrix_row_4,(unsigned char)matrix_row_5,
-                                (unsigned char)matrix_row_6,(unsigned char)matrix_row_7};
+        unsigned char arr[8] = {matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7};
         ht16k33_print_array(fd, arr);
     }
 
@@ -153,6 +173,11 @@ void MainWindow::on_pushButton_clicked()
 }
 
 //Combobox Display An<->Aus:
+/*!
+ \brief
+
+ \param index
+*/
 void MainWindow::on_comboBox_2_activated(int index)
 {
     switch(index){
@@ -172,6 +197,11 @@ void MainWindow::on_comboBox_2_activated(int index)
 }
 
 //Combobox Blinken Kein<->0.5Hz<->1Hz<->2Hz:
+/*!
+ \brief
+
+ \param index
+*/
 void MainWindow::on_comboBox_activated(int index)
 {
     switch(index){
@@ -209,6 +239,11 @@ void MainWindow::on_comboBox_activated(int index)
  * Wenn Checkbox gesetzt wird die Zeile mit einer 1 an der Stelle verodert.
  * Wenn Checkbox nicht gesetzt wird die Zeile mit einer 0 an der Stelle verundet.
  */
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_7_clicked(bool checked)
 {
     if(checked){
@@ -219,6 +254,11 @@ void MainWindow::on_checkBox_0_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_6_clicked(bool checked)
 {
     if(checked){
@@ -229,6 +269,11 @@ void MainWindow::on_checkBox_0_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_5_clicked(bool checked)
 {
     if(checked){
@@ -240,6 +285,11 @@ void MainWindow::on_checkBox_0_5_clicked(bool checked)
 }
 
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_4_clicked(bool checked)
 {
     if(checked){
@@ -250,6 +300,11 @@ void MainWindow::on_checkBox_0_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_3_clicked(bool checked)
 {
     if(checked){
@@ -260,6 +315,11 @@ void MainWindow::on_checkBox_0_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_2_clicked(bool checked)
 {
     if(checked){
@@ -270,6 +330,11 @@ void MainWindow::on_checkBox_0_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_1_clicked(bool checked)
 {
     if(checked){
@@ -280,6 +345,11 @@ void MainWindow::on_checkBox_0_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_0_0_clicked(bool checked)
 {
     if(checked){
@@ -290,6 +360,11 @@ void MainWindow::on_checkBox_0_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_7_clicked(bool checked)
 {
     if(checked){
@@ -300,6 +375,11 @@ void MainWindow::on_checkBox_1_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_6_clicked(bool checked)
 {
     if(checked){
@@ -310,6 +390,11 @@ void MainWindow::on_checkBox_1_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_5_clicked(bool checked)
 {
     if(checked){
@@ -320,6 +405,11 @@ void MainWindow::on_checkBox_1_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_4_clicked(bool checked)
 {
     if(checked){
@@ -330,6 +420,11 @@ void MainWindow::on_checkBox_1_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_3_clicked(bool checked)
 {
     if(checked){
@@ -340,6 +435,11 @@ void MainWindow::on_checkBox_1_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_2_clicked(bool checked)
 {
     if(checked){
@@ -350,6 +450,11 @@ void MainWindow::on_checkBox_1_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_1_clicked(bool checked)
 {
     if(checked){
@@ -360,6 +465,11 @@ void MainWindow::on_checkBox_1_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_1_0_clicked(bool checked)
 {
     if(checked){
@@ -370,6 +480,11 @@ void MainWindow::on_checkBox_1_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_7_clicked(bool checked)
 {
     if(checked){
@@ -380,6 +495,11 @@ void MainWindow::on_checkBox_2_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_6_clicked(bool checked)
 {
     if(checked){
@@ -390,6 +510,11 @@ void MainWindow::on_checkBox_2_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_5_clicked(bool checked)
 {
     if(checked){
@@ -400,6 +525,11 @@ void MainWindow::on_checkBox_2_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_4_clicked(bool checked)
 {
     if(checked){
@@ -410,6 +540,11 @@ void MainWindow::on_checkBox_2_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_3_clicked(bool checked)
 {
     if(checked){
@@ -420,6 +555,11 @@ void MainWindow::on_checkBox_2_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_2_clicked(bool checked)
 {
     if(checked){
@@ -430,6 +570,11 @@ void MainWindow::on_checkBox_2_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_1_clicked(bool checked)
 {
     if(checked){
@@ -441,6 +586,11 @@ void MainWindow::on_checkBox_2_1_clicked(bool checked)
 }
 
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_2_0_clicked(bool checked)
 {
     if(checked){
@@ -452,6 +602,11 @@ void MainWindow::on_checkBox_2_0_clicked(bool checked)
 }
 
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_7_clicked(bool checked)
 {
     if(checked){
@@ -462,6 +617,11 @@ void MainWindow::on_checkBox_3_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_6_clicked(bool checked)
 {
     if(checked){
@@ -472,6 +632,11 @@ void MainWindow::on_checkBox_3_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_5_clicked(bool checked)
 {
     if(checked){
@@ -482,6 +647,11 @@ void MainWindow::on_checkBox_3_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_4_clicked(bool checked)
 {
     if(checked){
@@ -492,6 +662,11 @@ void MainWindow::on_checkBox_3_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_3_clicked(bool checked)
 {
     if(checked){
@@ -502,6 +677,11 @@ void MainWindow::on_checkBox_3_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_2_clicked(bool checked)
 {
     if(checked){
@@ -512,6 +692,11 @@ void MainWindow::on_checkBox_3_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_1_clicked(bool checked)
 {
     if(checked){
@@ -522,6 +707,11 @@ void MainWindow::on_checkBox_3_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_3_0_clicked(bool checked)
 {
     if(checked){
@@ -532,6 +722,11 @@ void MainWindow::on_checkBox_3_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_7_clicked(bool checked)
 {
     if(checked){
@@ -542,6 +737,11 @@ void MainWindow::on_checkBox_4_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_6_clicked(bool checked)
 {
     if(checked){
@@ -552,6 +752,11 @@ void MainWindow::on_checkBox_4_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_5_clicked(bool checked)
 {
     if(checked){
@@ -562,6 +767,11 @@ void MainWindow::on_checkBox_4_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_4_clicked(bool checked)
 {
     if(checked){
@@ -572,6 +782,11 @@ void MainWindow::on_checkBox_4_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_3_clicked(bool checked)
 {
     if(checked){
@@ -582,6 +797,11 @@ void MainWindow::on_checkBox_4_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_2_clicked(bool checked)
 {
     if(checked){
@@ -592,6 +812,11 @@ void MainWindow::on_checkBox_4_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_1_clicked(bool checked)
 {
     if(checked){
@@ -602,6 +827,11 @@ void MainWindow::on_checkBox_4_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_4_0_clicked(bool checked)
 {
     if(checked){
@@ -612,6 +842,11 @@ void MainWindow::on_checkBox_4_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_7_clicked(bool checked)
 {
     if(checked){
@@ -622,6 +857,11 @@ void MainWindow::on_checkBox_5_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_6_clicked(bool checked)
 {
     if(checked){
@@ -632,6 +872,11 @@ void MainWindow::on_checkBox_5_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_5_clicked(bool checked)
 {
     if(checked){
@@ -642,6 +887,11 @@ void MainWindow::on_checkBox_5_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_4_clicked(bool checked)
 {
     if(checked){
@@ -652,6 +902,11 @@ void MainWindow::on_checkBox_5_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_3_clicked(bool checked)
 {
     if(checked){
@@ -662,6 +917,11 @@ void MainWindow::on_checkBox_5_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_2_clicked(bool checked)
 {
     if(checked){
@@ -672,6 +932,11 @@ void MainWindow::on_checkBox_5_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_1_clicked(bool checked)
 {
     if(checked){
@@ -682,6 +947,11 @@ void MainWindow::on_checkBox_5_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_5_0_clicked(bool checked)
 {
     if(checked){
@@ -692,6 +962,11 @@ void MainWindow::on_checkBox_5_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_7_clicked(bool checked)
 {
     if(checked){
@@ -702,6 +977,11 @@ void MainWindow::on_checkBox_6_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_6_clicked(bool checked)
 {
     if(checked){
@@ -712,6 +992,11 @@ void MainWindow::on_checkBox_6_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_5_clicked(bool checked)
 {
     if(checked){
@@ -722,6 +1007,11 @@ void MainWindow::on_checkBox_6_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_4_clicked(bool checked)
 {
     if(checked){
@@ -732,6 +1022,11 @@ void MainWindow::on_checkBox_6_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_3_clicked(bool checked)
 {
     if(checked){
@@ -742,6 +1037,11 @@ void MainWindow::on_checkBox_6_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_2_clicked(bool checked)
 {
     if(checked){
@@ -752,6 +1052,11 @@ void MainWindow::on_checkBox_6_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_1_clicked(bool checked)
 {
     if(checked){
@@ -762,6 +1067,11 @@ void MainWindow::on_checkBox_6_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_6_0_clicked(bool checked)
 {
     if(checked){
@@ -772,6 +1082,11 @@ void MainWindow::on_checkBox_6_0_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_7_clicked(bool checked)
 {
     if(checked){
@@ -782,6 +1097,11 @@ void MainWindow::on_checkBox_7_7_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_6_clicked(bool checked)
 {
     if(checked){
@@ -792,6 +1112,11 @@ void MainWindow::on_checkBox_7_6_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_5_clicked(bool checked)
 {
     if(checked){
@@ -802,6 +1127,11 @@ void MainWindow::on_checkBox_7_5_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_4_clicked(bool checked)
 {
     if(checked){
@@ -812,6 +1142,11 @@ void MainWindow::on_checkBox_7_4_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_3_clicked(bool checked)
 {
     if(checked){
@@ -822,6 +1157,11 @@ void MainWindow::on_checkBox_7_3_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_2_clicked(bool checked)
 {
     if(checked){
@@ -832,6 +1172,11 @@ void MainWindow::on_checkBox_7_2_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_1_clicked(bool checked)
 {
     if(checked){
@@ -842,6 +1187,11 @@ void MainWindow::on_checkBox_7_1_clicked(bool checked)
     }
 }
 
+/*!
+ \brief
+
+ \param checked
+*/
 void MainWindow::on_checkBox_7_0_clicked(bool checked)
 {
     if(checked){
@@ -853,9 +1203,13 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
 }
 
 //Muster komplett löschen:
+/*!
+ \brief
+
+*/
 void MainWindow::on_pushButton_4_clicked()
 {
-    //Jede einzelne CheckBox erst setzen und dann durch drücken auf nicht gefrückt setzen
+
     QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
     for (int i=0; i<allButtons.size();i++){
         allButtons.at(i)->setChecked(true);
@@ -864,9 +1218,13 @@ void MainWindow::on_pushButton_4_clicked()
 }
 
 //Muster komplett setzen:
+/*!
+ \brief
+
+*/
 void MainWindow::on_pushButton_3_clicked()
 {
-    //Jede einzelne CheckBox erst auf ungedrückt setzen und dann durch drücken setzen
+
     QList<QCheckBox *> allButtons = ui->gridGroupBox->findChildren<QCheckBox *>();
     for (int i=0; i<allButtons.size();i++){
         allButtons.at(i)->setChecked(false);
@@ -874,7 +1232,12 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-//Aktiviere "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
+//Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
+/*!
+ \brief
+
+ \param arg1
+*/
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1 != ""){
@@ -887,20 +1250,30 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
 
 //Gesetztes Muster in Datei speichern:
+/*!
+ \brief
+
+*/
 void MainWindow::on_pushButton_5_clicked(){
 
+<<<<<<< HEAD
     char* filename="./Muster";
 
     
     FILE *file;
     file = fopen(filename,"a");
     if(!file){
-        QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
-        return;
+=======
+    
+    QFile *file = new QFile(filename);
+    if(!file->open(QFile::Append|QFile::Text)){
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
+        QMessageBox::warning(this, "Fehler", "Datei konnte nicht geöffnet werden", QMessageBox::Ok);
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
         
+<<<<<<< HEAD
         printf("Speichern von %s ",toWrite.toUtf8().data());
         printf("%x %x %x %x %x %x %x %x\n",matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,
                matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7);
@@ -927,10 +1300,53 @@ void MainWindow::on_pushButton_5_clicked(){
         fputc(matrix_row_7,file);
         fputc(' ',file);
         fputc('\n',file);
+=======
+        //Nur bis zum ersten Leerzeichen speichern
+        toWrite = toWrite.split(" ")[0];
+
+
+        QString qrow_0(matrix_row_0);
+        if (matrix_row_0==0x00)
+            qrow_0='0';
+
+        QString qrow_1(matrix_row_1);
+        if (matrix_row_1==0x00)
+            qrow_1='0';
+
+        QString qrow_2(matrix_row_2);
+        if (matrix_row_2==0x00)
+            qrow_2='0';
+
+        QString qrow_3(matrix_row_3);
+        if (matrix_row_3==0x00)
+            qrow_3='0';
+
+        QString qrow_4(matrix_row_4);
+        if (matrix_row_3==0x00)
+            qrow_3='0';
+
+        QString qrow_5(matrix_row_5);
+        if (matrix_row_5==0x00)
+            qrow_5='0';
+
+        QString qrow_6(matrix_row_6);
+        if (matrix_row_6==0x00)
+            qrow_6='0';
+
+        QString qrow_7(matrix_row_7);
+        if (matrix_row_7==0x00)
+            qrow_7='0';
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
 
         fflush(file);
         fclose(file);
 
+<<<<<<< HEAD
+=======
+        file->write(toWrite.toUtf8().data());
+        file->flush();
+        file->close();
+>>>>>>> cc069e3654c429968bd346a3d088b9fb42789253
         ui->lineEdit->clear();//Textfeld leeren
         ui->pushButton_5->setEnabled(false);//"Speichern-Button" nicht anklickbar
         on_pushButton_4_clicked();//Musterauswahl löschen
@@ -948,67 +1364,38 @@ void MainWindow::on_pushButton_8_clicked(){
     QFile *file = new QFile(filename);
 
     if(!file->open(QIODevice::ReadOnly|QIODevice::Text)){
-        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
+        fprintf(stderr, "Fehler Datei konnte nicht geöffnet werden");
         return;
     }else{
         QTextStream input(file);
         while(!input.atEnd()){
             QString line = input.readLine();
-            QStringList list = line.split(" ");//Bis zum ersten Leerzeichen einlesen
-            ui->comboBox_3->addItem(list[0]);//Mustername zur Auswahlliste hinzufügen
+            QStringList list = line.split(" ");
+            ui->comboBox_3->addItem(list[0]);
         }
-        file->close();//Datei schließen
+        file->close();
     }
 }
 
 
 //Gewähltes Muster aus Datei lesen und setzen:
 void MainWindow::on_pushButton_7_clicked(){
-    char *item = ui->comboBox_3->currentText().toUtf8().data();
-    printf("Name Item: %s, Laenge: %d\n",item,ui->comboBox_3->currentText().length());
+    char* name = ui->comboBox_3->currentText().toUtf8().data();
+    printf("Name Item: %s\n",name);
     char * filename="Muster";
 
     FILE *file;
     file = fopen(filename,"r");
     if(!file){
-        QMessageBox::critical(NULL,"Datei konnte nicht geöffnet werden", "OK");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
-        return;
+        QMessageBox::critical(NULL,"Datei konnte nicht geöffnet werden", "OK");
     }
     else{
         char zeile[256];
-        char tmp[256];
+        char *tmp;
         while(fgets(zeile, sizeof(zeile),file)){
-           printf("Zeile: %s\n",zeile);
-           strcpy(tmp,zeile);
-           char *p = strchr(tmp,' ');
-           if(p){
-               *p = 0;
-               printf("Abgeschnitten: %s\n",tmp);
-               printf("Vergleich: %d\n",strcmp(tmp,item));
-               if(strcmp(tmp,item) == 0){
-                   printf("Gleich\n");
-                   char *f = strchr(zeile, ' ');
-                   char *c = ++f;
-                   //Variablen für die einzelnen Zeilen der Matrix setzen
-                   matrix_row_0 = *c;
-                   c+=2;
-                   matrix_row_1 = *c;
-                   c+=2;
-                   matrix_row_2 = *c;
-                   c+=2;
-                   matrix_row_3 = *c;
-                   c+=2;
-                   matrix_row_4 = *c;
-                   c+=2;
-                   matrix_row_5 = *c;
-                   c+=2;
-                   matrix_row_6 = *c;
-                   c+=2;
-                   matrix_row_7 = *c;
-                   MainWindow::on_pushButton_clicked();//Muster an Matrix senden
-                   break;//Schleifenabbruch
-               }
-           }
+            if(!strncmp(name,zeile,ui->comboBox_3->currentText().length())){
+                printf("Gleich - %s\n",zeile);
+            }
         }
     }
 
@@ -1020,47 +1407,23 @@ void MainWindow::on_comboBox_4_activated(int index){
     switch(index){
         case 0://Display normal
             isInverted=false;//Variable auf "false" "setzen
-            on_pushButton_clicked();//Muster senden
+            on_pushButton_clicked();//Muster nochmals senden
             break;
         case 1://Display invertiert
             isInverted=true;//Variable auf "true" setzen
-            on_pushButton_clicked();//Muster senden
+            on_pushButton_clicked();
             break;
         default://Display auch auf normal
             isInverted=false;//Variable auf "false" "setzen
-            on_pushButton_clicked();//Muster senden
+            on_pushButton_clicked();
             break;
     }
 }
 
 
-//Muster aus Datei und ComboBox löschen
+//Muster aus Datei löschen
 void MainWindow::on_pushButton_6_clicked(){
-    QString filename = "./Muster";
-
-    QFile *file = new QFile(filename);
-
-    QString item = ui->comboBox_3->currentText();//Gewähltes Muster bekommen
-
-    if(!file->open(QFile::ReadWrite)){
-        QMessageBox::critical(NULL,"Fehler","Datei konnte nicht geöffnet werden");//Falls Fehler beim öffnen der Datei: Fehlermeldung und abbrechen
-        return;
-    }
-    else{
-        QString newFile;
-        QTextStream t(file);
-        while(!t.atEnd()){
-            QString line = t.readLine();//Zeilenweise lesen
-            printf("Line: %s\n", line.toUtf8().data());
-            if(!(line.split(' ')[0] == item)){
-                newFile.append(line + "\n");
-            }
-        }
-        file->resize(0);
-        t << newFile;
-        file->close();//Datei schließen
-        MainWindow::on_pushButton_8_clicked();//Auswahlliste durch Auslsen der Datei aktualisieren
-    }
+    //TODO
 }
 
 
