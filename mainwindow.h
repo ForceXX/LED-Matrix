@@ -44,18 +44,18 @@ private:
     Ui::MainWindow *ui; /*!< TODO */
 private slots:
     /*!
-     \brief
+     \brief String an Matrix senden
 
     */
     void on_pushButton_2_clicked();
     /*!
-     \brief
+     \brief Helligkeit einstellen
 
-     \param value
+     \param value Stufe der Helligkeit 1-16
     */
     void on_horizontalSlider_valueChanged(int value);
     /*!
-     \brief
+     \brief Muster an Matrix senden
 
     */
     void on_pushButton_clicked();
@@ -457,51 +457,51 @@ private slots:
     */
     void on_checkBox_7_0_clicked(bool checked);
     /*!
-     \brief
+     \brief Jedes Feld leeren
 
     */
     void on_pushButton_4_clicked();
     /*!
-     \brief
+     \brief Jedes Feld füllen
 
     */
     void on_pushButton_3_clicked();
     /*!
-     \brief
+     \brief Gespeichertes Muster wieder löschen
 
     */
     void on_pushButton_6_clicked();
     /*!
-     \brief
+     \brief Gesetztes Muster speichern
 
     */
     void on_pushButton_5_clicked();
     /*!
-     \brief
+     \brief Gewähltes Muster aus Datei lesen und Muster setzen
 
     */
     void on_pushButton_7_clicked();
     /*!
-     \brief
+     \brief Gepsierte Muster aus Datei aktualisieren
 
     */
     void on_pushButton_8_clicked();
     /*!
-     \brief
+     \brief Aktiviere "Speichern"-Button wenn Textfeld nicht leer, sonst deaktivieren
 
      \param arg1
     */
     void on_lineEdit_textChanged(const QString &arg1);
     /*!
-     \brief
+     \brief Aktiviere "String Senden"-Button wenn Textfeld nicht leer, sonst deativieren
 
      \param arg1
     */
     void on_lineEdit_2_textEdited(const QString &arg1);
     /*!
-     \brief
+     \brief Invertieren umschalten
 
-     \param index
+     \param index Auswahl
     */
     void on_comboBox_4_activated(int index);
 };
