@@ -40,7 +40,7 @@ void ht16k33_write_command (int fd, uint8_t command);
 */
 int ht16k33_init_i2c();
 /*!
- \brief
+ \brief Leert die Matrix
 
  \param int
 */
@@ -60,14 +60,14 @@ void ht16k33_print_array(int, unsigned char*);
 */
 void ht16k33_print_array_dimm(int, unsigned char[8][8]);
 /*!
- \brief
+ \brief Zeichen des Strings einzeln ausgeben
 
  \param int
- \param
+ \param String
 */
 void ht16k33_print_string(int, char*);
 /*!
- \brief
+ \brief 
 
  \param int
  \param
@@ -75,10 +75,10 @@ void ht16k33_print_string(int, char*);
 */
 void ht16k33_scroll_chars_left(int, unsigned char*, unsigned char*);
 /*!
- \brief
+ \brief Laufschrift von rechts nach links
 
- \param int
- \param
+ \param int 
+ \param Einzelne Zeichen des Strings
 */
 void ht16k33_print_left(int, char*);
 /*!
@@ -90,10 +90,10 @@ void ht16k33_print_left(int, char*);
 */
 void ht16k33_scroll_chars_right(int, unsigned char*, unsigned char*);
 /*!
- \brief
+ \brief Laufschrift von links nach rechts
 
  \param int
- \param
+ \param Einzelne Zeichen des Strings
 */
 void ht16k33_print_right(int, char*);
 /*!
