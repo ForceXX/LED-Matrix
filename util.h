@@ -14,10 +14,10 @@
  */
 
 /*!
- \brief
+ \brief Liefert ein Zeichen in Hexadezimalen für jede Zeile zurück
 
- \param char
- \return unsigned char
+ \param char Zeichen
+ \return unsigned char Zeiger auf Zeichenvariable
 */
 unsigned char * charInHex(char);
 
