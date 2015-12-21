@@ -482,7 +482,7 @@ private slots:
     */
     void on_pushButton_7_clicked();
     /*!
-     \brief Gepsierte Muster aus Datei aktualisieren
+     \brief Gespeicherte Muster aus Datei aktualisieren
 
     */
     void on_pushButton_8_clicked();
