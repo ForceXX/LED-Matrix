@@ -17,10 +17,10 @@
 #include "HT16K33.h"
 
 /*!
- \brief
+ \brief Schreibt ein Befehlsbyte 'command' über I2C
 
- \param fd
- \param command
+ \param fd I2C-Variable
+ \param uint8_t command
 */
 void ht16k33_write_command(int fd, uint8_t command) {
     int result = i2c_smbus_write_byte(fd, command);
@@ -30,11 +30,11 @@ void ht16k33_write_command(int fd, uint8_t command) {
 }
 
 /*!
- \brief
+ \brief Schreibt ein Datenbyte 'data' zugehörig zum Befehlsbyte 'command' über I2C
 
- \param fd
- \param command
- \param data
+ \param fd I2C-Variable
+ \param uint8_t Befehlsbyte
+ \param uint8_t Datenbyte
 */
 void ht16k33_write_byte(int fd, uint8_t command, uint8_t data) {
     data = (data>>1)|(data<<7);
@@ -45,10 +45,11 @@ void ht16k33_write_byte(int fd, uint8_t command, uint8_t data) {
 }
 
 /*!
- \brief
+ \brief Gibt ein zweidimensionales char-Array Gibt ein char-Array
+ interpretiert als Zeilen auf der LED-Matrix aus
 
- \param fd
- \param arr8x8[][]
+ \param int I2C-Variable
+ \param char[][] char-Array
 */
 void ht16k33_print_array_dimm(int fd, unsigned char arr8x8[8][8]) {
     unsigned char i, j;
@@ -67,38 +68,30 @@ void ht16k33_print_array_dimm(int fd, unsigned char arr8x8[8][8]) {
     usleep(500000);
     return;
 }
-
-/*
- * Clears the LED-Matrix
- */
 /*!
- \brief
+ \brief Leert die Matrix
 
- \param fd
+ \param int I2C-Variable
 */
 void ht16k33_clear(int fd){
     ht16k33_print_array(fd, char_clean);
 }
-
-/*
- * Prints given Arrays of 8 chars to the LED-Matrix
- */
 /*!
- \brief
+ \brief Gibt ein char-Array interpretiert als Zeilen auf der LED-Matrix aus
 
- \param fd
- \param arr8x8[]
+ \param int I2C-Variable
+ \param char* char-Array
 */
 void ht16k33_print_array(int fd, unsigned char arr8x8[8]) {
     for (int i = 0; i < 8 ; i++) {
         ht16k33_write_byte(fd, row_address[7-i], arr8x8[i]);
     }
 }
-//Initialize the HT16K33-Controller
 /*!
- \brief
+ \brief Initialisiert den Controller HT16K33 mit Standardwerten und liefert die zum
+ Geraet gehoerige I2C-Variable zurück
 
- \return int
+ \return I2C-Variable
 */
 int ht16k33_init_i2c() {
     int fd;
@@ -118,13 +111,11 @@ int ht16k33_init_i2c() {
     ht16k33_write_command(fd, 0x00); // Start writing to address 0 (page 13)
     return fd;
 }
-
-//Prints string, redraw every single character
 /*!
- \brief
+ \brief Gibt nacheinander die Zeichen eines Strings auf der LED-Matrix aus
 
- \param fd
- \param input[]
+ \param int I2C-Variable
+ \param char* String
 */
 void ht16k33_print_string(int fd, char input[]) {
     int size = strlen(input);
@@ -133,16 +124,12 @@ void ht16k33_print_string(int fd, char input[]) {
         usleep(500000);
     }
 }
-
-/*
- * Scrolls two chars from the right to the left
- */
 /*!
- \brief
+ \brief Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von links nach rechts
 
- \param fd
- \param char1[]
- \param char2[]
+ \param int I2C-Variable
+ \param char* linkes Zeichen
+ \param char* rechtes Zeichen
 */
 void ht16k33_scroll_chars_left(int fd, unsigned char char1[], unsigned char char2[]){
     for(int j = 1; j <= 8; j++){
@@ -153,15 +140,11 @@ void ht16k33_scroll_chars_left(int fd, unsigned char char1[], unsigned char char
         usleep(SCROLL_WAIT);
     }
 }
-
-/*
- * Scrolls the given char Array from the right to the left
- */
 /*!
- \brief
+ \brief Laufschrift von links nach rechts
 
- \param fd
- \param s[]
+ \param int I2C-Variable
+ \param char* String
 */
 void ht16k33_print_left(int fd, char s[]){
         int size = strlen(s)-1;
@@ -171,16 +154,12 @@ void ht16k33_print_left(int fd, char s[]){
         usleep(SCROLL_WAIT_STILL);
         ht16k33_clear(fd);
 }
-
-/*
- * Scrolls two chars from the left to the right
- */
 /*!
- \brief
+ \brief Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von rechts nach links
 
- \param fd
- \param char1[]
- \param char2[]
+ \param int I2C-Variable
+ \param char* linkes Zeichen
+ \param char* rechtes Zeichen
 */
 void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char char2[]){
     for(int j = 1; j <= 8; j++){
@@ -191,15 +170,11 @@ void ht16k33_scroll_chars_right(int fd, unsigned char char1[], unsigned char cha
         usleep(SCROLL_WAIT);
     }
 }
-
-/*
- * Scrolls the given char Array from the left to the right
- */
 /*!
- \brief
+ \brief Laufschrift von rechts nach links
 
- \param fd
- \param s[]
+ \param int I2C-Variable
+ \param char* String
 */
 void ht16k33_print_right(int fd, char s[]){
         int size = strlen(s)-1;
@@ -209,28 +184,24 @@ void ht16k33_print_right(int fd, char s[]){
         usleep(SCROLL_WAIT_STILL);
         ht16k33_clear(fd);
 }
-
-//Sets given LED with coordinates X=posX, Y=posY to 1, if value != 0, else to 0
 /*!
- \brief
+ \brief Setzt eine einzelne LED
 
- \param fd
- \param posX
- \param posY
- \param value
+ \param int I2C-Variable
+ \param int X-Position
+ \param int Y-Position
+ \param int Wert der LED (1=an,0=aus)
 */
 void ht16k33_set_single_led(int fd, int posX, int posY, int value){
     if(((posX<=7)&&(posX>=0)) && ((value==0)||(value==1))){
         ht16k33_write_byte(fd, row_address[posY], (value<<posX));
     }
 }
-
-//Sets brightness of the LEDs
 /*!
- \brief
+ \brief Ändert die Helligkeit der LED-Matrix
 
- \param fd
- \param brigthness
+ \param int I2C-Variable
+ \param char Helligkeitswert
 */
 void ht16k33_set_brigthness(int fd, unsigned char brigthness){
     ht16k33_write_command(fd, brigthness);

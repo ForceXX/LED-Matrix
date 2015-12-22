@@ -13,21 +13,16 @@
 
 using namespace std;
 
-/*!
- \brief
-
- \param parent
-*/
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     fd = ht16k33_init_i2c();
-    
+
     //Matrix leeren
     ht16k33_clear(fd);
-    
+
     //Alle einzelnen Zeilen leeren
     matrix_row_0 = 0x00;
     matrix_row_1 = 0x00;
@@ -37,30 +32,21 @@ MainWindow::MainWindow(QWidget *parent) :
     matrix_row_5 = 0x00;
     matrix_row_6 = 0x00;
     matrix_row_7 = 0x00;
-    
+
     //standardmäßig nicht invertieren
     isInverted=false;
-    
+
     //Display anschalten
     display_setting = 0x81;
 
     MainWindow::on_pushButton_8_clicked();
 }
 
-/*!
- \brief
-
-*/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-//String-"Senden" Button
-/*!
- \brief
-
-*/
 void MainWindow::on_pushButton_2_clicked()
 {
     QString eingabe = ui->lineEdit_2->text();
@@ -85,11 +71,7 @@ void MainWindow::on_pushButton_2_clicked()
 }
 
 //Enable String-"Senden" Button wenn Textfeld nicht leer, sonst disable:
-/*!
- \brief
 
- \param arg1
-*/
 void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
 {
     if(arg1 != ""){
@@ -101,11 +83,7 @@ void MainWindow::on_lineEdit_2_textEdited(const QString &arg1)
 }
 
 //Helligkeit über horizontalen Slider einstellen (16 Stufen, default ganz hell(16)):
-/*!
- \brief
 
- \param value
-*/
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     switch(value){
@@ -146,10 +124,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 }
 
 //Gesetztes Muster an Matrix senden:
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_clicked()
 {
     //Wenn invertiert gewählt wurde
@@ -158,7 +133,7 @@ void MainWindow::on_pushButton_clicked()
                                 (unsigned char)~matrix_row_3,(unsigned char)~matrix_row_4,(unsigned char)~matrix_row_5,
                                 (unsigned char)~matrix_row_6,(unsigned char)~matrix_row_7};
         ht16k33_print_array(fd, arr);
-    
+
     //Normale Ausgabe
     }else{
         unsigned char arr[8] = {(unsigned char)matrix_row_0,(unsigned char)matrix_row_1,(unsigned char)matrix_row_2,
@@ -167,23 +142,20 @@ void MainWindow::on_pushButton_clicked()
         ht16k33_print_array(fd, arr);
     }
 
-//    printf("%x\n",matrix_row_0);
-//    printf("%x\n",matrix_row_1);
-//    printf("%x\n",matrix_row_2);
-//    printf("%x\n",matrix_row_3);
-//    printf("%x\n",matrix_row_4);
-//    printf("%x\n",matrix_row_5);
-//    printf("%x\n",matrix_row_6);
-//    printf("%x\n",matrix_row_7);
+    //Werte der Zeilen zu debugging-Zwecken auf der4 Standardkonsole ausgeben
+    printf("%x\n",matrix_row_0);
+    printf("%x\n",matrix_row_1);
+    printf("%x\n",matrix_row_2);
+    printf("%x\n",matrix_row_3);
+    printf("%x\n",matrix_row_4);
+    printf("%x\n",matrix_row_5);
+    printf("%x\n",matrix_row_6);
+    printf("%x\n",matrix_row_7);
 
 }
 
 //Combobox Display An<->Aus:
-/*!
- \brief
 
- \param index
-*/
 void MainWindow::on_comboBox_2_activated(int index)
 {
     switch(index){
@@ -203,11 +175,7 @@ void MainWindow::on_comboBox_2_activated(int index)
 }
 
 //Combobox Blinken Kein<->0.5Hz<->1Hz<->2Hz:
-/*!
- \brief
 
- \param index
-*/
 void MainWindow::on_comboBox_activated(int index)
 {
     switch(index){
@@ -245,11 +213,7 @@ void MainWindow::on_comboBox_activated(int index)
  * Wenn Checkbox gesetzt wird die Zeile mit einer 1 an der Stelle verodert.
  * Wenn Checkbox nicht gesetzt wird die Zeile mit einer 0 an der Stelle verundet.
  */
-/*!
- \brief
 
- \param checked
-*/
 void MainWindow::on_checkBox_0_7_clicked(bool checked)
 {
     if(checked){
@@ -260,11 +224,7 @@ void MainWindow::on_checkBox_0_7_clicked(bool checked)
     }
 }
 
-/*!
- \brief
 
- \param checked
-*/
 void MainWindow::on_checkBox_0_6_clicked(bool checked)
 {
     if(checked){
@@ -1209,10 +1169,7 @@ void MainWindow::on_checkBox_7_0_clicked(bool checked)
 }
 
 //Muster komplett löschen:
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_4_clicked()
 {
 
@@ -1224,10 +1181,7 @@ void MainWindow::on_pushButton_4_clicked()
 }
 
 //Muster komplett setzen:
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_3_clicked()
 {
 
@@ -1239,11 +1193,7 @@ void MainWindow::on_pushButton_3_clicked()
 }
 
 //Enable "Speichern"-Button wenn Textfeld nicht leer, sonst disable:
-/*!
- \brief
 
- \param arg1
-*/
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1 != ""){
@@ -1256,15 +1206,12 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 
 
 //Gesetztes Muster in Datei speichern:
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_5_clicked(){
 
     char* filename="./Muster";
 
-    
+
     FILE *file;
     file = fopen(filename,"a");
     if(!file){
@@ -1272,7 +1219,8 @@ void MainWindow::on_pushButton_5_clicked(){
     }else{
         QString toWrite;
         toWrite=ui->lineEdit->text();
-        
+
+        //Debug
         printf("Speichern von %s ",toWrite.toUtf8().data());
         printf("%x %x %x %x %x %x %x %x\n",matrix_row_0,matrix_row_1,matrix_row_2,matrix_row_3,
                matrix_row_4,matrix_row_5,matrix_row_6,matrix_row_7);
@@ -1305,7 +1253,7 @@ void MainWindow::on_pushButton_5_clicked(){
 
         ui->lineEdit->clear();//Textfeld leeren
         ui->pushButton_5->setEnabled(false);//"Speichern-Button" nicht anklickbar
-        on_pushButton_4_clicked();//Musterauswahl löschen
+        on_pushButton_4_clicked();//Zeilenvariablen zurücksetzen
         on_pushButton_8_clicked();//Musterauswahl in Combobox aktualisieren
 
     }
@@ -1314,10 +1262,7 @@ void MainWindow::on_pushButton_5_clicked(){
 
 
 //Musterauswahl aus Datei aktualisieren und in Combobox Speichern
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_8_clicked(){
     ui->comboBox_3->clear();
     QString filename="Muster";
@@ -1339,14 +1284,12 @@ void MainWindow::on_pushButton_8_clicked(){
 
 
 //Gewähltes Muster aus Datei lesen und setzen:
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_7_clicked(){
     char *item = ui->comboBox_3->currentText().toUtf8().data();
-    printf("Name Item: %s, Laenge: %d\n",item,ui->comboBox_3->currentText().length());
     char * filename="Muster";
+
+    printf("Name Item: %s, Laenge: %d\n",item,ui->comboBox_3->currentText().length());
 
     FILE *file;
     file = fopen(filename,"r");
@@ -1384,6 +1327,7 @@ void MainWindow::on_pushButton_7_clicked(){
                    c+=2;
                    matrix_row_7 = *c;
                    MainWindow::on_pushButton_clicked();
+                   fclose(file);
                    break;
                }
            }
@@ -1393,11 +1337,7 @@ void MainWindow::on_pushButton_7_clicked(){
 }
 
 //Invertieren an/aus:
-/*!
- \brief
 
- \param index
-*/
 void MainWindow::on_comboBox_4_activated(int index){
 
     switch(index){
@@ -1418,10 +1358,7 @@ void MainWindow::on_comboBox_4_activated(int index){
 
 
 //Muster aus Datei und ComboBox löschen
-/*!
- \brief
 
-*/
 void MainWindow::on_pushButton_6_clicked(){
     QString filename = "./Muster";
 
@@ -1448,6 +1385,3 @@ void MainWindow::on_pushButton_6_clicked(){
         MainWindow::on_pushButton_8_clicked();
     }
 }
-
-
-

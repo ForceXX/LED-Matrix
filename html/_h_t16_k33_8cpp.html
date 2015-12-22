@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>LED-Matrix: HT16K33.cpp-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">LED-Matrix
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="pages.html"><span>Zusätzliche&#160;Informationen</span></a></li>
+      <li><a href="modules.html"><span>Module</span></a></li>
+      <li><a href="namespaces.html"><span>Namensbereiche</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funktionen</a>  </div>
+  <div class="headertitle">
+<div class="title">HT16K33.cpp-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;linux/i2c-dev.h&gt;</code><br />
+<code>#include &lt;sys/ioctl.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="util_8h_source.html">util.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_h_t16_k33_8h_source.html">HT16K33.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:af1b13ce0f0367738f335533ab7100c45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#af1b13ce0f0367738f335533ab7100c45">ht16k33_clear</a> (int fd)</td></tr>
+<tr class="memdesc:af1b13ce0f0367738f335533ab7100c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Leert die Matrix.  <a href="#af1b13ce0f0367738f335533ab7100c45">Mehr ...</a><br /></td></tr>
+<tr class="separator:af1b13ce0f0367738f335533ab7100c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a568c84bcff100ad269a7142bb0a9e824"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a568c84bcff100ad269a7142bb0a9e824">ht16k33_init_i2c</a> ()</td></tr>
+<tr class="memdesc:a568c84bcff100ad269a7142bb0a9e824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisiert den Controller HT16K33 mit Standardwerten und liefert die zum Geraet gehoerige I2C-Variable zurück.  <a href="#a568c84bcff100ad269a7142bb0a9e824">Mehr ...</a><br /></td></tr>
+<tr class="separator:a568c84bcff100ad269a7142bb0a9e824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb4e3fd774cdfe53fc2ece89f5bb83f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a5eb4e3fd774cdfe53fc2ece89f5bb83f">ht16k33_print_array</a> (int fd, unsigned char arr8x8[8])</td></tr>
+<tr class="memdesc:a5eb4e3fd774cdfe53fc2ece89f5bb83f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt ein char-Array interpretiert als Zeilen auf der LED-Matrix aus.  <a href="#a5eb4e3fd774cdfe53fc2ece89f5bb83f">Mehr ...</a><br /></td></tr>
+<tr class="separator:a5eb4e3fd774cdfe53fc2ece89f5bb83f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeced63c04148bfd280a99c8c3bbea4ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#aeced63c04148bfd280a99c8c3bbea4ec">ht16k33_print_array_dimm</a> (int fd, unsigned char arr8x8[8][8])</td></tr>
+<tr class="memdesc:aeced63c04148bfd280a99c8c3bbea4ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt ein zweidimensionales char-Array Gibt ein char-Array interpretiert als Zeilen auf der LED-Matrix aus.  <a href="#aeced63c04148bfd280a99c8c3bbea4ec">Mehr ...</a><br /></td></tr>
+<tr class="separator:aeced63c04148bfd280a99c8c3bbea4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1e25a24f9e6e2b8b14953c889f4209c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#ac1e25a24f9e6e2b8b14953c889f4209c">ht16k33_print_left</a> (int fd, char s[])</td></tr>
+<tr class="memdesc:ac1e25a24f9e6e2b8b14953c889f4209c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Laufschrift von links nach rechts.  <a href="#ac1e25a24f9e6e2b8b14953c889f4209c">Mehr ...</a><br /></td></tr>
+<tr class="separator:ac1e25a24f9e6e2b8b14953c889f4209c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3df385172eeaf0563333fa3e7a3b3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#acf3df385172eeaf0563333fa3e7a3b3e">ht16k33_print_right</a> (int fd, char s[])</td></tr>
+<tr class="memdesc:acf3df385172eeaf0563333fa3e7a3b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Laufschrift von rechts nach links.  <a href="#acf3df385172eeaf0563333fa3e7a3b3e">Mehr ...</a><br /></td></tr>
+<tr class="separator:acf3df385172eeaf0563333fa3e7a3b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460750159472a600b0f9e6d2faff7467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a460750159472a600b0f9e6d2faff7467">ht16k33_print_string</a> (int fd, char input[])</td></tr>
+<tr class="memdesc:a460750159472a600b0f9e6d2faff7467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt nacheinander die Zeichen eines Strings auf der LED-Matrix aus.  <a href="#a460750159472a600b0f9e6d2faff7467">Mehr ...</a><br /></td></tr>
+<tr class="separator:a460750159472a600b0f9e6d2faff7467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a743b6d202c715a29ba98db7c0a86933a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a743b6d202c715a29ba98db7c0a86933a">ht16k33_scroll_chars_left</a> (int fd, unsigned char char1[], unsigned char char2[])</td></tr>
+<tr class="memdesc:a743b6d202c715a29ba98db7c0a86933a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von links nach rechts.  <a href="#a743b6d202c715a29ba98db7c0a86933a">Mehr ...</a><br /></td></tr>
+<tr class="separator:a743b6d202c715a29ba98db7c0a86933a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45a875eecfb8fbdf1036cf52eef4ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#aa45a875eecfb8fbdf1036cf52eef4ca2">ht16k33_scroll_chars_right</a> (int fd, unsigned char char1[], unsigned char char2[])</td></tr>
+<tr class="memdesc:aa45a875eecfb8fbdf1036cf52eef4ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von rechts nach links.  <a href="#aa45a875eecfb8fbdf1036cf52eef4ca2">Mehr ...</a><br /></td></tr>
+<tr class="separator:aa45a875eecfb8fbdf1036cf52eef4ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e9ae9cbb01319ab7b9d28003718689"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a99e9ae9cbb01319ab7b9d28003718689">ht16k33_set_brigthness</a> (int fd, unsigned char brigthness)</td></tr>
+<tr class="memdesc:a99e9ae9cbb01319ab7b9d28003718689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ändert die Helligkeit der LED-Matrix.  <a href="#a99e9ae9cbb01319ab7b9d28003718689">Mehr ...</a><br /></td></tr>
+<tr class="separator:a99e9ae9cbb01319ab7b9d28003718689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39132e16c95ac06b3543fb85eab27f9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a39132e16c95ac06b3543fb85eab27f9b">ht16k33_set_single_led</a> (int fd, int posX, int posY, int value)</td></tr>
+<tr class="memdesc:a39132e16c95ac06b3543fb85eab27f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setzt eine einzelne LED.  <a href="#a39132e16c95ac06b3543fb85eab27f9b">Mehr ...</a><br /></td></tr>
+<tr class="separator:a39132e16c95ac06b3543fb85eab27f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac74df0a85335beb8e3e6ec842852b186"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#ac74df0a85335beb8e3e6ec842852b186">ht16k33_write_byte</a> (int fd, uint8_t command, uint8_t data)</td></tr>
+<tr class="memdesc:ac74df0a85335beb8e3e6ec842852b186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schreibt ein Datenbyte 'data' zugehörig zum Befehlsbyte 'command' über I2C.  <a href="#ac74df0a85335beb8e3e6ec842852b186">Mehr ...</a><br /></td></tr>
+<tr class="separator:ac74df0a85335beb8e3e6ec842852b186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bf239b38814a1be443eef50e75a8c0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_h_t16_k33_8cpp.html#a8bf239b38814a1be443eef50e75a8c0f">ht16k33_write_command</a> (int fd, uint8_t command)</td></tr>
+<tr class="memdesc:a8bf239b38814a1be443eef50e75a8c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schreibt ein Befehlsbyte 'command' über I2C.  <a href="#a8bf239b38814a1be443eef50e75a8c0f">Mehr ...</a><br /></td></tr>
+<tr class="separator:a8bf239b38814a1be443eef50e75a8c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="af1b13ce0f0367738f335533ab7100c45"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_clear </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Leert die Matrix. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a568c84bcff100ad269a7142bb0a9e824"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ht16k33_init_i2c </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisiert den Controller HT16K33 mit Standardwerten und liefert die zum Geraet gehoerige I2C-Variable zurück. </p>
+<dl class="section return"><dt>Rückgabe</dt><dd>I2C-Variable </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5eb4e3fd774cdfe53fc2ece89f5bb83f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_print_array </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>arr8x8</em>[8]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt ein char-Array interpretiert als Zeilen auf der LED-Matrix aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>char-Array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aeced63c04148bfd280a99c8c3bbea4ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_print_array_dimm </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>arr8x8</em>[8][8]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt ein zweidimensionales char-Array Gibt ein char-Array interpretiert als Zeilen auf der LED-Matrix aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char[][]</td><td>char-Array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac1e25a24f9e6e2b8b14953c889f4209c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_print_left </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>s</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Laufschrift von links nach rechts. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>String </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acf3df385172eeaf0563333fa3e7a3b3e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_print_right </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>s</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Laufschrift von rechts nach links. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>String </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a460750159472a600b0f9e6d2faff7467"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_print_string </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>input</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt nacheinander die Zeichen eines Strings auf der LED-Matrix aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>String </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a743b6d202c715a29ba98db7c0a86933a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_scroll_chars_left </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>char1</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>char2</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von links nach rechts. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>linkes Zeichen </td></tr>
+    <tr><td class="paramname">char*</td><td>rechtes Zeichen </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa45a875eecfb8fbdf1036cf52eef4ca2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_scroll_chars_right </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>char1</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>char2</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Schiebt zwei einzelne Zeichen mithilfe von Bitoperationen von rechts nach links. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char*</td><td>linkes Zeichen </td></tr>
+    <tr><td class="paramname">char*</td><td>rechtes Zeichen </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a99e9ae9cbb01319ab7b9d28003718689"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_set_brigthness </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>brigthness</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ändert die Helligkeit der LED-Matrix. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">char</td><td>Helligkeitswert </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a39132e16c95ac06b3543fb85eab27f9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_set_single_led </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>posY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Setzt eine einzelne LED. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">int</td><td>X-Position </td></tr>
+    <tr><td class="paramname">int</td><td>Y-Position </td></tr>
+    <tr><td class="paramname">int</td><td>Wert der LED (1=an,0=aus) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac74df0a85335beb8e3e6ec842852b186"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_write_byte </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Schreibt ein Datenbyte 'data' zugehörig zum Befehlsbyte 'command' über I2C. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">uint8_t</td><td>Befehlsbyte </td></tr>
+    <tr><td class="paramname">uint8_t</td><td>Datenbyte </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8bf239b38814a1be443eef50e75a8c0f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ht16k33_write_command </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>command</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Schreibt ein Befehlsbyte 'command' über I2C. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>I2C-Variable </td></tr>
+    <tr><td class="paramname">uint8_t</td><td>command </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>
